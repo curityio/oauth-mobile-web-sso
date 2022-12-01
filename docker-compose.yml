@@ -1,0 +1,58 @@
+version: '3.8'
+services:
+
+  #
+  # The reverse proxy is the only host exposed to the internet and the mobile emulator or device
+  #
+  reverse-proxy:
+    image: kong:3.0.0
+    hostname: reverseproxy
+    ports:
+      - 80:3000
+    volumes:
+      - ./reverse-proxy/kong.yml:/usr/local/kong/declarative/kong.yml
+      - ./web-app/:/usr/local/kong/web-app/
+    environment:
+      KONG_DATABASE: 'off'
+      KONG_DECLARATIVE_CONFIG: '/usr/local/kong/declarative/kong.yml'
+      KONG_PROXY_LISTEN: '0.0.0.0:3000'
+      KONG_LOG_LEVEL: 'info'
+
+  #
+  # The web host serves static content
+  #
+  web-host:
+    image: webhost:1.35
+    hostname: webhost
+
+  #
+  # The Curity Identity Server is exposed by Kong via runtime and admin paths
+  #
+  curity-idsvr:
+    image: curity.azurecr.io/curity/idsvr:7.5.1
+    hostname: identityserver
+    ports:
+      - 6749:6749
+    volumes:
+     - ./idsvr/license.json:/opt/idsvr/etc/init/license/license.json
+     - ./idsvr/config-backup.xml:/opt/idsvr/etc/init/config.xml
+    environment:
+      ADMIN: 'true'
+      LOGGING_LEVEL: 'INFO'
+      RUNTIME_BASE_URL: "${RUNTIME_BASE_URL}"
+      # A real system would not check the config encryption key into source control
+      CONFIG_ENCRYPTION_KEY: '4fbfeb2d404a0bdef3f4e03cc5ec590d674740901a5806b3bd30083e14038113'
+      
+  #
+  # The database for the Curity Identity Server, with a fixed user account
+  #
+  curity-data:
+    image: postgres:14.5
+    hostname: dbserver
+    volumes:
+      - ./idsvr/data:/var/lib/postgresql/data
+      - ./idsvr/data-backup.sql:/docker-entrypoint-initdb.d/data-backup.sql
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'Password1'
+      POSTGRES_DB: 'idsvr'

@@ -1,0 +1,24 @@
+_format_version: '2.1'
+_transform: true
+
+services:
+
+#
+# The default route hits the runtime node of the Curity Identity Server
+#
+- name: idsvr
+  url: http://identityserver:8443
+  routes:
+  - name: idsvr-runtime-route
+    paths:
+    - /
+
+#
+# The SPA is loaded from the /spa external path
+#
+- name: webhost
+  url: http://webhost:3000
+  routes:
+  - name: webhost-route
+    paths:
+    - /spa
