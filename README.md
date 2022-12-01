@@ -1,10 +1,10 @@
 # OAuth Mobile Web Integration
 
-Stub mobile and web apps to demonstrate the nonce authenticator pattern.
+Demo mobile and web apps to demonstrate the nonce authenticator pattern on a development computer.
 
 ## Run the Code Example
 
-The following components are used, from a mobile emulator or device running on a development computer:
+The following components are used, from a mobile emulator or device:
 
 ![Development Setup](./doc/development-setup.png)
 
