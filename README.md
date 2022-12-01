@@ -25,10 +25,9 @@ deploy.sh
 
 ## External URLs
 
-The following internet URLs are available, and the second of these is called
+Internet URLs of the following form are available from a mobile emulator or device:
 
 | Component | Internet URL |
 | --------- | ------------ |
 | Web Application | https://c7b9-2-26-158-168.eu.ngrok.io/spa |
 | Curity Identity Server Runtime URL | https://c7b9-2-26-158-168.eu.ngrok.io |
-| Curity Identity Server Admin URL | https://c7b9-2-26-158-168.eu.ngrok.io/admin |
