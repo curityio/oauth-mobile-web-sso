@@ -15,13 +15,13 @@ Build and deploy the system with the following commands:
 ./deploy.sh
 ```
 
-A URL of the following form will be output, and called from the mobile app:
+A URL of the following form will be output:
 
 ```bash
 The internet base URL is: https://c7b9-2-26-158-168.eu.ngrok.io
 ```
 
-Internet URLs of the following form are available from a mobile emulator or device:
+Applications running on mobile devices or emulators will then call URLs of this form:
 
 | Component | Internet URL |
 | --------- | ------------ |
