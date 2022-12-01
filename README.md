@@ -2,28 +2,24 @@
 
 Stub mobile and web apps to demonstrate the nonce authenticator pattern.
 
-## Application Behavior
+## Run the Code Example
 
-The mobile app signs the user in, using a standard mobile flow.\
-Run either the Android or iOS app, then invoke a web view or integrated browser:
-
-When the button is clicked, the mobile app creates a nonce using its ID token:
-
-The web app can then run a guaranteed SSO flow using the nonce.
-
-## Deployment
-
-The development setup is implemented as follows, using Docker and ngrok:
+The following components are used, from a mobile emulator or device running on a development computer:
 
 ![Development Setup](./doc/development-setup.png)
 
-Deploy the system with the following command:
+Build and deploy the system with the following commands:
 
 ```bash
-deploy.sh
+./build.sh
+./deploy.sh
 ```
 
-## External URLs
+A URL of the following form will be output, and called from the mobile app:
+
+```bash
+The internet base URL is: https://c7b9-2-26-158-168.eu.ngrok.io
+```
 
 Internet URLs of the following form are available from a mobile emulator or device:
 
@@ -31,3 +27,7 @@ Internet URLs of the following form are available from a mobile emulator or devi
 | --------- | ------------ |
 | Web Application | https://c7b9-2-26-158-168.eu.ngrok.io/spa |
 | Curity Identity Server Runtime URL | https://c7b9-2-26-158-168.eu.ngrok.io |
+
+## Application Flow
+
+TODO
