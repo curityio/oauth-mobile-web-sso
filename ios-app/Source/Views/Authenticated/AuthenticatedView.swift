@@ -57,18 +57,19 @@ struct AuthenticatedView: View {
             }
             .buttonStyle(MenuButtonStyle(width: deviceWidth * 0.77))
         }
+        .onAppear(perform: self.model.createNonce)
     }
 
     /*
      * Open the SPA in a web view
      */
     private func onInvokeWebView() -> WebViewDialog {
-        
+            
         let deviceWidth = UIScreen.main.bounds.size.width
         let deviceHeight = UIScreen.main.bounds.size.height
 
         return WebViewDialog(
-            url: URL(string: self.model.configuration.webAppUrl)!,
+            url: self.model.getSpaUrl(),
             width: deviceWidth,
             height: deviceHeight)
     }
@@ -80,9 +81,8 @@ struct AuthenticatedView: View {
 
         let safariConfiguration = SFSafariViewController.Configuration()
         safariConfiguration.entersReaderIfAvailable = true
-
-        let url = URL(string: self.model.configuration.webAppUrl)
-        let safari = SFSafariViewController(url: url!, configuration: safariConfiguration)
+            
+        let safari = SFSafariViewController(url: self.model.getSpaUrl(), configuration: safariConfiguration)
         ViewControllerAccessor.getRoot().present(safari, animated: true)
     }
 
@@ -90,8 +90,6 @@ struct AuthenticatedView: View {
      * Open the SPA in the system browser
      */
     private func onInvokeSystemBrowser() {
-
-        let url = URL(string: self.model.configuration.webAppUrl)
-        UIApplication.shared.open(url!)
+        UIApplication.shared.open(self.model.getSpaUrl())
     }
 }

@@ -33,6 +33,7 @@
 		28190F16293A6186007640AA /* TokenState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F15293A6186007640AA /* TokenState.swift */; };
 		28190F19293A68DC007640AA /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F18293A68DC007640AA /* ErrorView.swift */; };
 		28190F1B293A68EA007640AA /* ErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F1A293A68EA007640AA /* ErrorViewModel.swift */; };
+		28DE1484293A76540091424F /* NonceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DE1483293A76540091424F /* NonceResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		28190F15293A6186007640AA /* TokenState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenState.swift; sourceTree = "<group>"; };
 		28190F18293A68DC007640AA /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		28190F1A293A68EA007640AA /* ErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewModel.swift; sourceTree = "<group>"; };
+		28DE1483293A76540091424F /* NonceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonceResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 				28190EF7293A3788007640AA /* AppAuthHandler.swift */,
 				28190EFB293A3828007640AA /* NonceService.swift */,
 				28190F15293A6186007640AA /* TokenState.swift */,
+				28DE1483293A76540091424F /* NonceResponse.swift */,
 			);
 			path = OAuth;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				28190EE2293A1EF6007640AA /* MenuButtonStyle.swift in Sources */,
 				28190F03293A4F8B007640AA /* MainViewModel.swift in Sources */,
 				28190F10293A55D0007640AA /* AuthenticatedViewModel.swift in Sources */,
+				28DE1484293A76540091424F /* NonceResponse.swift in Sources */,
 				28190F14293A5B04007640AA /* ViewControllerAccessor.swift in Sources */,
 				28190EE8293A240F007640AA /* WebViewCache.swift in Sources */,
 				28190F1B293A68EA007640AA /* ErrorViewModel.swift in Sources */,

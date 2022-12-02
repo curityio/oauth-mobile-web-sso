@@ -1,7 +1,8 @@
 ## Mobile OAuth Flow
 
-- Get a nonce and pass it to the webview
-- Use OAuth tools to sign in as the web client, to verify the authenticator
+- Use built-in Swift coroutines
+- Nonce should be created when the buttons are clicked, not on page load
+- Debug using OAuth tools to sign in as the web client, and ensure that the authenticator is working
 
 ## Web OAuth Flow
 

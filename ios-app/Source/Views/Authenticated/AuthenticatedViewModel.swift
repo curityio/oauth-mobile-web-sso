@@ -21,11 +21,44 @@ import Foundation
  */
 class AuthenticatedViewModel: ObservableObject {
 
-    let configuration: ApplicationConfiguration
-    private let tokenState: TokenState
+    private let configuration: ApplicationConfiguration
+    private var tokenState: TokenState
+    private let onError: (ApplicationError) -> Void
 
-    init(configuration: ApplicationConfiguration, tokenState: TokenState) {
+    init(configuration: ApplicationConfiguration,
+         tokenState: TokenState,
+         onError: @escaping (ApplicationError) -> Void) {
+
         self.configuration = configuration
         self.tokenState = tokenState
+        self.onError = onError
+    }
+
+    /*
+     * Swap the ID token for a nonce on a background thread and return the SPA URL
+     */
+    func createNonce() {
+        
+        Task {
+            
+            do {
+                let service = NonceService(configuration: self.configuration)
+                self.tokenState.nonce = try await service.createNonce(idToken: self.tokenState.idToken)
+                print("Nonce issued: \(self.tokenState.nonce)")
+
+            } catch {
+                
+                DispatchQueue.main.async {
+                    self.onError(error as! ApplicationError)
+                }
+            }
+        }
+    }
+    
+    /*
+     * Use the nonce and then discard it
+     */
+    func getSpaUrl() -> URL{
+        return URL(string: "\(self.configuration.baseUrl)\(self.configuration.spaPath)?nonce=\(self.tokenState.nonce)")!
     }
 }

@@ -3,9 +3,11 @@
  */
 struct TokenState {
     
-    let idToken: String
+    var idToken: String
+    var nonce: String
     
     init(idToken: String) {
         self.idToken = idToken
+        self.nonce = ""
     }
 }

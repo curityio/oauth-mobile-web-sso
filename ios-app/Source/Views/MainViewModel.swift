@@ -52,7 +52,8 @@ class MainViewModel: ObservableObject {
         if self.authenticatedModel == nil {
             self.authenticatedModel = AuthenticatedViewModel(
                 configuration: self.configuration,
-                tokenState: self.tokenState)
+                tokenState: self.tokenState,
+                onError: self.onError)
         }
 
         return self.authenticatedModel!

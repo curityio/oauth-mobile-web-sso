@@ -34,8 +34,8 @@ class AppAuthHandler {
         
         let promise = CoPromise<OIDServiceConfiguration>()
         
-        let issuerUriValue = URL(string: self.configuration.issuerUri)!
-        OIDAuthorizationService.discoverConfiguration(forIssuer: issuerUriValue) { metadata, ex in
+        let issuerUri = URL(string: "\(self.configuration.baseUrl)\(self.configuration.issuerPath)")!
+        OIDAuthorizationService.discoverConfiguration(forIssuer: issuerUri) { metadata, ex in
 
             if metadata != nil {
                promise.success(metadata!)
@@ -147,7 +147,7 @@ class AppAuthHandler {
         var parts = [String]()
         if (ex == nil) {
 
-            parts.append("Unknown Error")
+            parts.append("Authorization Error")
 
         } else {
 

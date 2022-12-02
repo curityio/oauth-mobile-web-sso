@@ -18,9 +18,11 @@
  * The application configuration settings
  */
 struct ApplicationConfiguration: Decodable {
-    let issuerUri: String
+    let baseUrl: String
+    let issuerPath: String
+    let nonceAuthenticatorPath: String
     let clientID: String
     let redirectUri: String
     let scope: String
-    let webAppUrl: String
+    let spaPath: String
 }
