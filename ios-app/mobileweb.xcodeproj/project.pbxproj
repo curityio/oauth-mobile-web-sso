@@ -17,13 +17,22 @@
 		28190EE8293A240F007640AA /* WebViewCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190EE7293A240F007640AA /* WebViewCache.swift */; };
 		28190EEA293A24A7007640AA /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190EE9293A24A7007640AA /* WebView.swift */; };
 		28190EEC293A2C06007640AA /* mobile-config-template.json in Resources */ = {isa = PBXBuildFile; fileRef = 28190EEB293A2C06007640AA /* mobile-config-template.json */; };
-		28190EEF293A2CA3007640AA /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190EEE293A2CA3007640AA /* Configuration.swift */; };
-		28190EF1293A2CD0007640AA /* ConfigurationLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190EF0293A2CD0007640AA /* ConfigurationLoader.swift */; };
+		28190EEF293A2CA3007640AA /* ApplicationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190EEE293A2CA3007640AA /* ApplicationConfiguration.swift */; };
+		28190EF1293A2CD0007640AA /* ApplicationConfigurationLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190EF0293A2CD0007640AA /* ApplicationConfigurationLoader.swift */; };
 		28190EF5293A2FDE007640AA /* mobile-config.json in Resources */ = {isa = PBXBuildFile; fileRef = 28190EF4293A2FDE007640AA /* mobile-config.json */; };
 		28190EF8293A3788007640AA /* AppAuthHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190EF7293A3788007640AA /* AppAuthHandler.swift */; };
 		28190EFC293A3828007640AA /* NonceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190EFB293A3828007640AA /* NonceService.swift */; };
 		28190EFE293A4B92007640AA /* UnauthenticatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190EFD293A4B92007640AA /* UnauthenticatedView.swift */; };
 		28190F03293A4F8B007640AA /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F02293A4F8B007640AA /* MainViewModel.swift */; };
+		28190F06293A5319007640AA /* AppAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 28190F05293A5319007640AA /* AppAuth */; };
+		28190F09293A5372007640AA /* SwiftCoroutine in Frameworks */ = {isa = PBXBuildFile; productRef = 28190F08293A5372007640AA /* SwiftCoroutine */; };
+		28190F0C293A5449007640AA /* ApplicationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F0B293A5449007640AA /* ApplicationError.swift */; };
+		28190F10293A55D0007640AA /* AuthenticatedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F0F293A55D0007640AA /* AuthenticatedViewModel.swift */; };
+		28190F12293A560D007640AA /* UnauthenticatedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F11293A560D007640AA /* UnauthenticatedViewModel.swift */; };
+		28190F14293A5B04007640AA /* ViewControllerAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F13293A5B04007640AA /* ViewControllerAccessor.swift */; };
+		28190F16293A6186007640AA /* TokenState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F15293A6186007640AA /* TokenState.swift */; };
+		28190F19293A68DC007640AA /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F18293A68DC007640AA /* ErrorView.swift */; };
+		28190F1B293A68EA007640AA /* ErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F1A293A68EA007640AA /* ErrorViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,13 +47,20 @@
 		28190EE7293A240F007640AA /* WebViewCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewCache.swift; sourceTree = "<group>"; };
 		28190EE9293A24A7007640AA /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		28190EEB293A2C06007640AA /* mobile-config-template.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "mobile-config-template.json"; sourceTree = "<group>"; };
-		28190EEE293A2CA3007640AA /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
-		28190EF0293A2CD0007640AA /* ConfigurationLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationLoader.swift; sourceTree = "<group>"; };
+		28190EEE293A2CA3007640AA /* ApplicationConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationConfiguration.swift; sourceTree = "<group>"; };
+		28190EF0293A2CD0007640AA /* ApplicationConfigurationLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationConfigurationLoader.swift; sourceTree = "<group>"; };
 		28190EF4293A2FDE007640AA /* mobile-config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "mobile-config.json"; sourceTree = "<group>"; };
 		28190EF7293A3788007640AA /* AppAuthHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAuthHandler.swift; sourceTree = "<group>"; };
 		28190EFB293A3828007640AA /* NonceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonceService.swift; sourceTree = "<group>"; };
 		28190EFD293A4B92007640AA /* UnauthenticatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnauthenticatedView.swift; sourceTree = "<group>"; };
 		28190F02293A4F8B007640AA /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		28190F0B293A5449007640AA /* ApplicationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationError.swift; sourceTree = "<group>"; };
+		28190F0F293A55D0007640AA /* AuthenticatedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatedViewModel.swift; sourceTree = "<group>"; };
+		28190F11293A560D007640AA /* UnauthenticatedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnauthenticatedViewModel.swift; sourceTree = "<group>"; };
+		28190F13293A5B04007640AA /* ViewControllerAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerAccessor.swift; sourceTree = "<group>"; };
+		28190F15293A6186007640AA /* TokenState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenState.swift; sourceTree = "<group>"; };
+		28190F18293A68DC007640AA /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		28190F1A293A68EA007640AA /* ErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +68,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28190F06293A5319007640AA /* AppAuth in Frameworks */,
+				28190F09293A5372007640AA /* SwiftCoroutine in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +99,7 @@
 		28190ED0293A150F007640AA /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				28190F0A293A5439007640AA /* Errors */,
 				28190EED293A2C7D007640AA /* Configuration */,
 				28190EFF293A4E9C007640AA /* Views */,
 				28190EE6293A23E5007640AA /* WebView */,
@@ -103,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				28190EE1293A1EF6007640AA /* MenuButtonStyle.swift */,
+				28190F13293A5B04007640AA /* ViewControllerAccessor.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -120,8 +140,8 @@
 		28190EED293A2C7D007640AA /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				28190EEE293A2CA3007640AA /* Configuration.swift */,
-				28190EF0293A2CD0007640AA /* ConfigurationLoader.swift */,
+				28190EEE293A2CA3007640AA /* ApplicationConfiguration.swift */,
+				28190EF0293A2CD0007640AA /* ApplicationConfigurationLoader.swift */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -131,6 +151,7 @@
 			children = (
 				28190EF7293A3788007640AA /* AppAuthHandler.swift */,
 				28190EFB293A3828007640AA /* NonceService.swift */,
+				28190F15293A6186007640AA /* TokenState.swift */,
 			);
 			path = OAuth;
 			sourceTree = "<group>";
@@ -140,6 +161,7 @@
 			children = (
 				28190F00293A4F62007640AA /* Authenticated */,
 				28190F01293A4F6E007640AA /* Unauthenticated */,
+				28190F17293A68D1007640AA /* Errors */,
 				28190ED3293A150F007640AA /* MainView.swift */,
 				28190F02293A4F8B007640AA /* MainViewModel.swift */,
 			);
@@ -150,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				28190EDF293A16A2007640AA /* AuthenticatedView.swift */,
+				28190F0F293A55D0007640AA /* AuthenticatedViewModel.swift */,
 			);
 			path = Authenticated;
 			sourceTree = "<group>";
@@ -158,8 +181,26 @@
 			isa = PBXGroup;
 			children = (
 				28190EFD293A4B92007640AA /* UnauthenticatedView.swift */,
+				28190F11293A560D007640AA /* UnauthenticatedViewModel.swift */,
 			);
 			path = Unauthenticated;
+			sourceTree = "<group>";
+		};
+		28190F0A293A5439007640AA /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				28190F0B293A5449007640AA /* ApplicationError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		28190F17293A68D1007640AA /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				28190F18293A68DC007640AA /* ErrorView.swift */,
+				28190F1A293A68EA007640AA /* ErrorViewModel.swift */,
+			);
+			path = Errors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,6 +219,10 @@
 			dependencies = (
 			);
 			name = mobileweb;
+			packageProductDependencies = (
+				28190F05293A5319007640AA /* AppAuth */,
+				28190F08293A5372007640AA /* SwiftCoroutine */,
+			);
 			productName = mobileweb;
 			productReference = 28190ECE293A150F007640AA /* mobileweb.app */;
 			productType = "com.apple.product-type.application";
@@ -206,6 +251,10 @@
 				Base,
 			);
 			mainGroup = 28190EC5293A150F007640AA;
+			packageReferences = (
+				28190F04293A5319007640AA /* XCRemoteSwiftPackageReference "AppAuth-iOS" */,
+				28190F07293A5372007640AA /* XCRemoteSwiftPackageReference "SwiftCoroutine" */,
+			);
 			productRefGroup = 28190ECF293A150F007640AA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -240,13 +289,20 @@
 				28190EE0293A16A2007640AA /* AuthenticatedView.swift in Sources */,
 				28190EE2293A1EF6007640AA /* MenuButtonStyle.swift in Sources */,
 				28190F03293A4F8B007640AA /* MainViewModel.swift in Sources */,
+				28190F10293A55D0007640AA /* AuthenticatedViewModel.swift in Sources */,
+				28190F14293A5B04007640AA /* ViewControllerAccessor.swift in Sources */,
 				28190EE8293A240F007640AA /* WebViewCache.swift in Sources */,
+				28190F1B293A68EA007640AA /* ErrorViewModel.swift in Sources */,
 				28190ED2293A150F007640AA /* DemoApp.swift in Sources */,
+				28190F12293A560D007640AA /* UnauthenticatedViewModel.swift in Sources */,
 				28190EF8293A3788007640AA /* AppAuthHandler.swift in Sources */,
 				28190EFC293A3828007640AA /* NonceService.swift in Sources */,
-				28190EEF293A2CA3007640AA /* Configuration.swift in Sources */,
+				28190EEF293A2CA3007640AA /* ApplicationConfiguration.swift in Sources */,
+				28190F19293A68DC007640AA /* ErrorView.swift in Sources */,
+				28190F0C293A5449007640AA /* ApplicationError.swift in Sources */,
 				28190EEA293A24A7007640AA /* WebView.swift in Sources */,
-				28190EF1293A2CD0007640AA /* ConfigurationLoader.swift in Sources */,
+				28190EF1293A2CD0007640AA /* ApplicationConfigurationLoader.swift in Sources */,
+				28190F16293A6186007640AA /* TokenState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +501,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		28190F04293A5319007640AA /* XCRemoteSwiftPackageReference "AppAuth-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/openid/AppAuth-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.0;
+			};
+		};
+		28190F07293A5372007640AA /* XCRemoteSwiftPackageReference "SwiftCoroutine" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/belozierov/SwiftCoroutine";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.11;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		28190F05293A5319007640AA /* AppAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 28190F04293A5319007640AA /* XCRemoteSwiftPackageReference "AppAuth-iOS" */;
+			productName = AppAuth;
+		};
+		28190F08293A5372007640AA /* SwiftCoroutine */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 28190F07293A5372007640AA /* XCRemoteSwiftPackageReference "SwiftCoroutine" */;
+			productName = SwiftCoroutine;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 28190EC6293A150F007640AA /* Project object */;
 }

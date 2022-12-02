@@ -29,7 +29,7 @@ Applications running on mobile devices or emulators will then call these URLs:
 | Curity Identity Server Runtime URL | https://c7b9-2-26-158-168.eu.ngrok.io |
 
 The Curity Identity Server Admin URL is at `http://localhost:6749/admin`.\
-Sign into the Admin UI with credentials `admin / Password1` to understand the OAuth settings.\
+Sign into the Admin UI with credentials `admin / Password1` to understand the OAuth settings.
 
 ## Application Flow
 
@@ -38,6 +38,9 @@ Run either the Android or IOS app, and an unauthenticated view will be shown:
 ![unauthenticated view](./doc/unauthenticated-view.png)
 
 Click the login button and sign in as `demouser / Password1`.\
+
+![mobile login](./doc/mobile-login.png)
+
 The authenticated view will then be presented, to navigate to a Single Page Application (SPA):
 
 ![authenticated view](./doc/authenticated-view.png)

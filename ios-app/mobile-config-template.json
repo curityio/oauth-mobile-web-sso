@@ -1,3 +1,7 @@
 {
+  "issuerUri": "$RUNTIME_BASE_URL/oauth/v2/oauth-anonymous",
+  "clientID": "mobile-client",
+  "redirectUri": "io.curity.client:/callback",
+  "scope": "openid",
   "webAppUrl": "$RUNTIME_BASE_URL/spa"
 }

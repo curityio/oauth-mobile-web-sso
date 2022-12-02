@@ -1,3 +1,19 @@
+//
+// Copyright (C) 2022 Curity AB.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
 import SwiftUI
 import SafariServices
 
@@ -6,11 +22,11 @@ import SafariServices
  */
 struct AuthenticatedView: View {
 
+    @ObservedObject private var model: AuthenticatedViewModel
     @State private var showModal = false
-    private let configuration: Configuration
-
-    init() {
-        self.configuration = ConfigurationLoader.load()
+    
+    init(model: AuthenticatedViewModel) {
+        self.model = model
     }
 
     /*
@@ -52,7 +68,7 @@ struct AuthenticatedView: View {
         let deviceHeight = UIScreen.main.bounds.size.height
 
         return WebViewDialog(
-            url: URL(string: self.configuration.webAppUrl)!,
+            url: URL(string: self.model.configuration.webAppUrl)!,
             width: deviceWidth,
             height: deviceHeight)
     }
@@ -65,9 +81,9 @@ struct AuthenticatedView: View {
         let safariConfiguration = SFSafariViewController.Configuration()
         safariConfiguration.entersReaderIfAvailable = true
 
-        let url = URL(string: self.configuration.webAppUrl)
+        let url = URL(string: self.model.configuration.webAppUrl)
         let safari = SFSafariViewController(url: url!, configuration: safariConfiguration)
-        self.getHostingViewController().present(safari, animated: true)
+        ViewControllerAccessor.getRoot().present(safari, animated: true)
     }
 
     /*
@@ -75,16 +91,7 @@ struct AuthenticatedView: View {
      */
     private func onInvokeSystemBrowser() {
 
-        let url = URL(string: self.configuration.webAppUrl)
+        let url = URL(string: self.model.configuration.webAppUrl)
         UIApplication.shared.open(url!)
-    }
-    
-    /*
-     * A helper method to get the main view controller
-     */
-    private func getHostingViewController() -> UIViewController {
-
-        let scene = UIApplication.shared.connectedScenes.first as! UIWindowScene
-        return scene.keyWindow!.rootViewController!
     }
 }

@@ -13,3 +13,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
+
+import Foundation
+
+/*
+ * The view model for the authenticated view
+ */
+class AuthenticatedViewModel: ObservableObject {
+
+    let configuration: ApplicationConfiguration
+    private let tokenState: TokenState
+
+    init(configuration: ApplicationConfiguration, tokenState: TokenState) {
+        self.configuration = configuration
+        self.tokenState = tokenState
+    }
+}

@@ -865,8 +865,6 @@ COMMENT ON COLUMN public.tokens.claims IS 'Optional JSON-blob that contains a li
 
 COPY public.accounts (account_id, username, password, email, phone, attributes, active, created, updated) FROM stdin;
 c02d2dde-ee25-11eb-9535-0242ac130005	demouser	$5$rounds=20000$zXoLTfTLXOUevIIf$xKoU.9qf6qj24vmCp3Jm/R915tcOTzUdp7jRqd9YP69	demo@user.com	\N	{"name": {"givenName": "Demo", "familyName": "User"}, "emails": [{"value": "demo@user.com", "primary": true}], "Custom1": "A string value", "Custom2": 123, "mfaOptIn": {"preferences": {"optOutAt": 1650624860}, "registeredFactors": {"factors": []}}, "agreeToTerms": "on"}	1	1627313147	1654781651
-6ef1621e-ac2f-11ec-ab4f-0242ac170002	john.doe	\N	john.doe@mycompany.com	\N	{"emails": [{"value": "john.doe@mycompany.com", "primary": true}]}	0	1648208026	1648208026
-4d807914-ab51-11ec-b593-0242ac170002	jane.doe	$6$rounds=21000$qRkOkssaXtIk9Js9$dnYexwe25q/z.BNTEG9oc1RveWccM0LN8s/jnauBwF7N6Hko9nyLgLjtO3lDBOc/8sin4izMmUq94Anc2TUNr0	jane.doe@mycompany.com	\N	{"name": {"givenName": "Jane", "familyName": "Doe"}, "emails": [{"value": "jane.doe@mycompany.com", "primary": true}], "Custom1": "A string value", "Custom2": 123, "agreeToTerms": "on"}	1	1648112622	1654781929
 \.
 
 

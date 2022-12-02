@@ -13,3 +13,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
+
+import SwiftUI
+
+struct ViewControllerAccessor {
+    
+    static func getRoot() -> UIViewController {
+        
+        let scene = UIApplication.shared.connectedScenes.first as! UIWindowScene
+        return scene.keyWindow!.rootViewController!
+    }
+}

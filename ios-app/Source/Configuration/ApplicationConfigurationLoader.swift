@@ -13,3 +13,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
+
+import Foundation
+
+/*
+ * A helper class to load configuration
+ */
+struct ApplicationConfigurationLoader {
+
+    /*
+     * Load configuration from the embedded resource
+     */
+    static func load() -> ApplicationConfiguration {
+
+        let filePath = Bundle.main.path(forResource: "mobile-config", ofType: "json")!
+        let jsonText = try! String(contentsOfFile: filePath)
+        let jsonData = jsonText.data(using: .utf8)!
+
+        return try! JSONDecoder().decode(ApplicationConfiguration.self, from: jsonData)
+    }
+}

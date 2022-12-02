@@ -13,3 +13,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
+
+class ApplicationError: Error {
+    
+    var title: String
+    var description: String
+    
+    init(title: String, description: String) {
+        self.title = title
+        self.description = description
+    }
+}
+

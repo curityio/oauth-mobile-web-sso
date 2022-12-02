@@ -16,29 +16,33 @@
 
 import SwiftUI
 
-/*
- * The screen presented before login, to trigger a standard redirect
- */
-struct UnauthenticatedView: View {
+struct ErrorView: View {
+
+    @ObservedObject private var model: ErrorViewModel
     
-    @ObservedObject private var model: UnauthenticatedViewModel
-    
-    init(model: UnauthenticatedViewModel) {
+    init(model: ErrorViewModel) {
         self.model = model
     }
-
-    /*
-     * Render an option to login
-     */
+    
     var body: some View {
-        
-        let deviceWidth = UIScreen.main.bounds.size.width
+    
         return VStack {
+            
+            Text(self.model.title)
+                .foregroundColor(Color.gray)
+                .font(.system(size: 20))
+                .fontWeight(.semibold)
+                .padding(.top, 10)
+                .padding(.bottom, 5)
 
-            Button(action: self.model.login) {
-               Text("Sign in to the Mobile App")
-            }
-            .buttonStyle(MenuButtonStyle(width: deviceWidth * 0.77))
+            Text(self.model.description)
+                .foregroundColor(Color.red)
+                .font(.system(size: 14))
+                .fontWeight(.semibold)
+                .padding(.top, 10)
+                .padding(.leading, 20)
+                .padding(.trailing, 20)
         }
     }
 }
+
