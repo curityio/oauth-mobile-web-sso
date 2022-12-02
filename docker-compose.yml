@@ -36,6 +36,7 @@ services:
     volumes:
      - ./idsvr/license.json:/opt/idsvr/etc/init/license/license.json
      - ./idsvr/config-backup.xml:/opt/idsvr/etc/init/config.xml
+     - ./resources/nonce-authenticator/target:/opt/idsvr/usr/share/plugins/nonce-authenticator
     environment:
       ADMIN: 'true'
       LOGGING_LEVEL: 'INFO'

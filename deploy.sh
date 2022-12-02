@@ -4,6 +4,8 @@
 # Deploy components and expose the entry point reverse proxy to the internet
 ############################################################################
 
+cd "$(dirname "${BASH_SOURCE[0]}")"
+
 #
 # Check we have a license file
 #
@@ -51,10 +53,9 @@ echo "The internet base URL is: $RUNTIME_BASE_URL"
 export RUNTIME_BASE_URL
 
 #
-# Update mobile apps
+# Update mobile app configuration to use the base URL
 #
 envsubst < ./ios-app/mobile-config-template.json > ./ios-app/mobile-config.json
-exit
 
 #
 # Run the docker deployment

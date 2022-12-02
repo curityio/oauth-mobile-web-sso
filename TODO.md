@@ -1,16 +1,15 @@
 ## Mobile OAuth Flow
 
-- Render a login button when there are no tokens
-- Register mobile and web clients with scope openid
-- Implement code from main AppAuth sample
-- Update docs
-- Print the ID token
-- Deploy the plugin and create a nonce authenticator
+- Create clients in idsvr with scope openid
+- Initial mobile unauthenticated view, and rename menu view to authenticated view
+- Mobile AppAuth, with prompt=login and error handling, then print the ID token
 - Get a nonce and pass it to the webview
+- Use OAuth tools to sign in as the web client
+- Update docs to show the journey
 
 ## Web OAuth Flow
 
 - Deploy oauth-agent and get SPA to use it to login if it has no cookie yet
-- Document local setup for web development
-- Use the nonce when a load occurs and it is present
-- Get rid of nonce authenticator from standard logins
+- Get local setup working for web development and document it
+- Use the nonce when the SPA loads with it as a query param
+- Filter out nonce authenticator from standard logins
