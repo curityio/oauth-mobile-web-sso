@@ -1,22 +1,16 @@
-## Basic Mobile App Implementation
+## Basic Mobile Implementation
 
-Android and iOS:
-
-- Write runtime base URL to config file
-- Invoke web host for both types of browser
-
-## Web OAuth Flow
-
-Deploy oauth-agent and get SPA to use it to login if it has no cookie yet
+- Write runtime URL to file and read as JSON
+- Checkin and get files working
 
 ## Mobile OAuth Flow
 
-Implement code from main AppAuth samples
+- Implement code from main AppAuth samples
+- Use Swift Coroutines and AppAuth libraries
+- Get nonce and pass to webview
 
-## Mobile Nonce Flow
+## Web OAuth Flow
 
-Get this and pass it to the web app
-
-## Web Nonce Flow
-
-Check for cookies or use the nonce
+- Deploy oauth-agent and get SPA to use it to login if it has no cookie yet
+- Local Setup
+- Check for cookies or use the nonce

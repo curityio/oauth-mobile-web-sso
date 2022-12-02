@@ -17,33 +17,44 @@ fi
 #
 
 #
-# Check software prerequisites
+# Use an ngrok base URL unless one is provided as an environment variables
 #
-ngrok version
-if [ $? -ne 0 ]; then
-  echo 'Please ensure that the ngrok tool is installed'
-  exit 1
-fi
+if [ "$RUNTIME_BASE_URL" == '' ]; then
 
-#
-# Use ngrok to get a single internet host name that can be reached from a mobile emulator or device
-#
-if [ "$(pgrep ngrok)" == '' ]; then
-  ngrok http 80 --log=stdout &
-  sleep 5
-fi
+  ngrok version
+  if [ $? -ne 0 ]; then
+    echo 'Please ensure that the ngrok tool is installed'
+    exit 1
+  fi
 
-export RUNTIME_BASE_URL=$(curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[] | select(.proto == "https") | .public_url')
-if [ "$RUNTIME_BASE_URL" == "" ]; then
-  echo 'Problem encountered getting an NGROK URL'
-  exit 1
+  if [ "$(pgrep ngrok)" == '' ]; then
+    ngrok http 80 --log=stdout &
+    sleep 5
+  fi
+
+  RUNTIME_BASE_URL=$(curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[] | select(.proto == "https") | .public_url')
+  if [ "$RUNTIME_BASE_URL" == "" ]; then
+    echo 'Problem encountered getting an NGROK URL'
+    exit 1
+  fi
 fi
-echo "The internet base URL is: $RUNTIME_BASE_URL"
 
 #
 # Clear leftover data on the Docker shared volume
 #
 rm -rf idsvr/data
+
+#
+# Set the final base URL
+#
+echo "The internet base URL is: $RUNTIME_BASE_URL"
+export RUNTIME_BASE_URL
+
+#
+# Update mobile apps
+#
+envsubst < ./ios-app/mobile-config-template.json > ./ios-app/mobile-config.json
+exit
 
 #
 # Run the docker deployment

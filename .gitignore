@@ -1,4 +1,14 @@
+# General
 license.json
 .DS_Store
 resources
 data
+mobile-config.json
+build
+
+# iOS
+xcuserdata
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
