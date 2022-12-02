@@ -15,10 +15,6 @@ if [ ! -f './idsvr/license.json' ]; then
 fi
 
 #
-# Prevent accidental checkins of license files
-#
-
-#
 # Use an ngrok base URL unless one is provided as an environment variables
 #
 if [ "$RUNTIME_BASE_URL" == '' ]; then
@@ -53,9 +49,13 @@ echo "The internet base URL is: $RUNTIME_BASE_URL"
 export RUNTIME_BASE_URL
 
 #
-# Update mobile app configuration to use the base URL
+# Update mobile app configuration to use the runtime base URL
 #
 envsubst < ./ios-app/mobile-config-template.json > ./ios-app/mobile-config.json
+if [ $? -ne 0 ]; then
+  echo 'Problem encountered using envsubst to update mobile configuration'
+  exit 1
+fi
 
 #
 # Run the docker deployment

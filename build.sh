@@ -8,6 +8,11 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 rm -rf resources 2>/dev/null
 
 #
+# Prevent checkins of secrets
+#
+cp ./hooks/pre-commit ./.git/hooks
+
+#
 # Build the web host
 #
 docker build -f web-app/Dockerfile -t webhost:1.35 .

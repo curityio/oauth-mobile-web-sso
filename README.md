@@ -6,7 +6,7 @@ Demo mobile and web apps to demonstrate the nonce authenticator pattern on a dev
 
 The following components are used, from a mobile emulator or device:
 
-![Development Setup](./doc/development-setup.png)
+![Components](./doc/components.png)
 
 Build and deploy the system with the following commands:
 
@@ -21,6 +21,7 @@ A URL of the following form will be output:
 The internet base URL is: https://c7b9-2-26-158-168.eu.ngrok.io
 ```
 
+The Admin UI for the Curity Identity Server is at `http://localhost:6749/admin` with credentials `admin / Password1`.\
 Applications running on mobile devices or emulators will then call these URLs:
 
 | Component | Internet URL |
@@ -30,4 +31,13 @@ Applications running on mobile devices or emulators will then call these URLs:
 
 ## Application Flow
 
-When the mobile app needs to 
+Run either the Android or IOS app, and an unauthenticated view will be shown:
+
+![unauthenticated view](./doc/unauthenticated-view.png)
+
+Click the login button and sign in as `demouser / Password1`.\
+The authenticated view will then be presented, to navigate to a Single Page Application (SPA):
+
+![authenticated view](./doc/authenticated-view.png)
+
+A `nonce authenticator` is used, to avoid a second user login, and to enable the SPA to get its own tokens.

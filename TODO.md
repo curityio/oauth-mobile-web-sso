@@ -1,7 +1,5 @@
 ## Mobile OAuth Flow
 
-- Create clients in idsvr with scope openid
-- Initial mobile unauthenticated view, and rename menu view to authenticated view
 - Mobile AppAuth, with prompt=login and error handling, then print the ID token
 - Get a nonce and pass it to the webview
 - Use OAuth tools to sign in as the web client
