@@ -21,7 +21,7 @@ A URL of the following form will be output:
 The internet base URL is: https://c7b9-2-26-158-168.eu.ngrok.io
 ```
 
-Applications running on mobile devices or emulators will then call URLs of this form:
+Applications running on mobile devices or emulators will then call these URLs:
 
 | Component | Internet URL |
 | --------- | ------------ |
@@ -30,4 +30,4 @@ Applications running on mobile devices or emulators will then call URLs of this 
 
 ## Application Flow
 
-TODO
+When the mobile app needs to 

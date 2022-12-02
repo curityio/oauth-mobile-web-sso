@@ -1,16 +1,15 @@
-## Basic Mobile Implementation
-
-- Write runtime URL to file and read as JSON
-- Checkin and get files working
-
 ## Mobile OAuth Flow
 
-- Implement code from main AppAuth samples
-- Use Swift Coroutines and AppAuth libraries
-- Get nonce and pass to webview
+- Render a login button when there are no tokens
+- Register mobile and web clients with scope openid
+- Implement code from main AppAuth sample
+- Print the ID token
+- Deploy the plugin and create a nonce authenticator
+- Get a nonce and pass it to the webview
 
 ## Web OAuth Flow
 
 - Deploy oauth-agent and get SPA to use it to login if it has no cookie yet
-- Local Setup
-- Check for cookies or use the nonce
+- Local setup for web development
+- Use the nonce when a load occurs and it is present
+- Get rid of nonce authenticator from standard logins
