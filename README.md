@@ -21,13 +21,15 @@ A URL of the following form will be output:
 The internet base URL is: https://c7b9-2-26-158-168.eu.ngrok.io
 ```
 
-The Admin UI for the Curity Identity Server is at `http://localhost:6749/admin` with credentials `admin / Password1`.\
 Applications running on mobile devices or emulators will then call these URLs:
 
 | Component | Internet URL |
 | --------- | ------------ |
 | Web Application | https://c7b9-2-26-158-168.eu.ngrok.io/spa |
 | Curity Identity Server Runtime URL | https://c7b9-2-26-158-168.eu.ngrok.io |
+
+The Curity Identity Server Admin URL is at `http://localhost:6749/admin`.\
+Sign into the Admin UI with credentials `admin / Password1` to understand the OAuth settings.\
 
 ## Application Flow
 
