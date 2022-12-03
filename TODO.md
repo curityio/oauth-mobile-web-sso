@@ -2,10 +2,11 @@
 
 - Use built-in Swift coroutines
 - Nonce should be created when the buttons are clicked, not on page load
-- Debug using OAuth tools to sign in as the web client, and ensure that the authenticator is working
+- Stop ngrok in the teardown script
 
 ## Web OAuth Flow
 
+- Debug using OAuth tools to sign in as the web client, and ensure that the authenticator is working
 - Deploy oauth-agent
 - Minor look and feel improvements to SPA
 - Get local setup working for web development and add a sub README on local development

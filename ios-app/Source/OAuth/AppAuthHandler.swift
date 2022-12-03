@@ -15,52 +15,48 @@
 //
 
 import AppAuth
-import SwiftCoroutine
 
 class AppAuthHandler {
     
     private let configuration: ApplicationConfiguration
     private var userAgentSession: OIDExternalUserAgentSession?
+    private var responseHandler: AuthorizationResponseHandler?
     
     init(configuration: ApplicationConfiguration) {
         self.configuration = configuration
-        self.userAgentSession = nil
     }
 
     /*
      * Get OpenID Connect endpoints
      */
-    func fetchMetadata() throws -> CoFuture<OIDServiceConfiguration> {
-        
-        let promise = CoPromise<OIDServiceConfiguration>()
-        
-        let issuerUri = URL(string: "\(self.configuration.baseUrl)\(self.configuration.issuerPath)")!
-        OIDAuthorizationService.discoverConfiguration(forIssuer: issuerUri) { metadata, ex in
+    func fetchMetadata() async throws -> OIDServiceConfiguration {
 
-            if metadata != nil {
-               promise.success(metadata!)
-
-            } else {
-
-                let error = self.createAuthorizationError(title: "Metadata Download Error", ex: ex)
-                promise.fail(error)
+        try await withCheckedThrowingContinuation { continuation in
+            
+            let issuerUri = URL(string: "\(self.configuration.baseUrl)\(self.configuration.issuerPath)")!
+            OIDAuthorizationService.discoverConfiguration(forIssuer: issuerUri) { metadata, ex in
+                
+                if metadata != nil {
+                    continuation.resume(returning: metadata!)
+                    
+                } else {
+                    
+                    let error = self.createAuthorizationError(title: "Metadata Download Error", ex: ex)
+                    continuation.resume(throwing: error)
+                }
             }
         }
-        
-        return promise
     }
-
+    
     /*
      * Trigger a redirect with standard parameters and also prompt=login
      */
-    func performAuthorizationRedirect(
-        metadata: OIDServiceConfiguration,
-        clientID: String,
-        viewController: UIViewController) -> CoFuture<OIDAuthorizationResponse?> {
+    func performAuthorizationRedirect(metadata: OIDServiceConfiguration,
+                                      clientID: String,
+                                      viewController: UIViewController) {
         
-        let promise = CoPromise<OIDAuthorizationResponse?>()
         let redirectUriValue = URL(string: self.configuration.redirectUri)!
-
+        
         var extraParams = [String: String]()
         extraParams["prompt"] = "login"
         
@@ -73,61 +69,61 @@ class AppAuthHandler {
             redirectURL: redirectUriValue,
             responseType: OIDResponseTypeCode,
             additionalParameters: extraParams)
-
-        let userAgent = OIDExternalUserAgentIOS(presenting: viewController)
-        self.userAgentSession = OIDAuthorizationService.present(request, externalUserAgent: userAgent!) { response, ex in
-            
-            if response != nil {
-                
-                promise.success(response!)
-
-            } else {
-                
-                if ex != nil && self.isUserCancellationErrorCode(ex: ex!) {
-
-                    promise.success(nil)
-
-                } else {
-
-                    
-                    let error = self.createAuthorizationError(title: "Authorization Request Error", ex: ex)
-                    promise.fail(error)
-                }
-            }
-            
-            self.userAgentSession = nil
-        }
         
-        return promise
+        let userAgent = OIDExternalUserAgentIOS(presenting: viewController)
+        
+        self.responseHandler = AuthorizationResponseHandler()
+        self.userAgentSession = OIDAuthorizationService.present(
+            request,
+            externalUserAgent: userAgent!,
+            callback: self.responseHandler!.callback)
     }
-    
+
+    /*
+     * Finish processing, which occurs on a worker thread
+     */
+    func handleAuthorizationResponse() async throws -> OIDAuthorizationResponse? {
+
+        do {
+            
+            return try await self.responseHandler!.waitForCallback()
+            
+        } catch {
+
+            if (self.isUserCancellationErrorCode(ex: error)) {
+                return nil
+            }
+
+            throw self.createAuthorizationError(title: "Authorization Request Error", ex: error)
+        }
+    }
+
     /*
      * Handle the authorization response, including the user closing the Chrome Custom Tab
      */
     func redeemCodeForTokens(
-        authResponse: OIDAuthorizationResponse) -> CoFuture<OIDTokenResponse> {
-
-        let promise = CoPromise<OIDTokenResponse>()
-
-        let extraParams = [String: String]()
-        let request = authResponse.tokenExchangeRequest(withAdditionalParameters: extraParams)
-
-        OIDAuthorizationService.perform(
-            request!,
-            originalAuthorizationResponse: authResponse) { tokenResponse, ex in
-
-            if tokenResponse != nil {
-
-                promise.success(tokenResponse!)
-
-            } else {
-
-                let error = self.createAuthorizationError(title: "Authorization Response Error", ex: ex)
-                promise.fail(error)
+        authResponse: OIDAuthorizationResponse) async throws -> OIDTokenResponse {
+            
+        try await withCheckedThrowingContinuation { continuation in
+            
+            let extraParams = [String: String]()
+            let request = authResponse.tokenExchangeRequest(withAdditionalParameters: extraParams)
+            
+            OIDAuthorizationService.perform(
+                request!,
+                originalAuthorizationResponse: authResponse) { tokenResponse, ex in
+                    
+                if tokenResponse != nil {
+                    
+                    continuation.resume(returning: tokenResponse!)
+                    
+                } else {
+                    
+                    let error = self.createAuthorizationError(title: "Authorization Response Error", ex: ex)
+                    continuation.resume(throwing: error)
+                }
             }
         }
-        
-        return promise
     }
 
     /*

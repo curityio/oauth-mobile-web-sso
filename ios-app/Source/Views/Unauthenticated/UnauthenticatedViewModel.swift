@@ -15,7 +15,6 @@
 //
 
 import Foundation
-import SwiftCoroutine
 import AppAuth
 
 /*
@@ -39,48 +38,44 @@ class UnauthenticatedViewModel: ObservableObject {
     }
     
     func login() {
-        
-        DispatchQueue.main.startCoroutine {
-            
+
+        Task {
+
             do {
-                
+
                 // Get metadata on a background thread
-                var metadata: OIDServiceConfiguration? = nil
-                if metadata == nil {
-                    try DispatchQueue.global().await {
-                        metadata = try self.appauth.fetchMetadata().await()
-                    }
+                let metadata = try await self.appauth.fetchMetadata()
+
+                // Do the redirect on the UI thread, and no async handling can be done here
+                print("*** start main")
+                await MainActor.run {
+
+                    print("*** start redirect")
+                    self.appauth.performAuthorizationRedirect(
+                        metadata: metadata,
+                        clientID: self.configuration.clientID,
+                        viewController: ViewControllerAccessor.getRoot())
+                    print("*** end redirect")
                 }
-                
-                // Then redirect on the UI thread
-                let authorizationResponse = try self.appauth.performAuthorizationRedirect(
-                    metadata: metadata!,
-                    clientID: self.configuration.clientID,
-                    viewController: ViewControllerAccessor.getRoot()
-                ).await()
-                
+
+                // Process the authorization response on a background thread
+                let authorizationResponse = try await self.appauth.handleAuthorizationResponse()
                 if authorizationResponse != nil {
                     
                     // Redeem the code for tokens on a background thread
-                    var tokenResponse: OIDTokenResponse? = nil
-                    try DispatchQueue.global().await {
-                        
-                        tokenResponse = try self.appauth.redeemCodeForTokens(
-                            authResponse: authorizationResponse!
-                            
-                        ).await()
-                    }
+                    let tokenResponse = try await self.appauth.redeemCodeForTokens(authResponse: authorizationResponse!)
                     
                     // Notify the main view, which will move the app to the authenticated view
-                    self.onAuthenticated(tokenResponse!.idToken!)
+                    await MainActor.run {
+                        self.onAuthenticated(tokenResponse.idToken!)
+                    }
                 }
                 
             } catch {
-
+                
                 // Report any technical problems
-                let appError = error as? ApplicationError
-                if appError != nil {
-                    self.onError(appError!)
+                await MainActor.run {
+                    self.onError(error as! ApplicationError)
                 }
             }
         }

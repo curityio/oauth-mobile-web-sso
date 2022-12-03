@@ -25,7 +25,6 @@
 		28190EFE293A4B92007640AA /* UnauthenticatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190EFD293A4B92007640AA /* UnauthenticatedView.swift */; };
 		28190F03293A4F8B007640AA /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F02293A4F8B007640AA /* MainViewModel.swift */; };
 		28190F06293A5319007640AA /* AppAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 28190F05293A5319007640AA /* AppAuth */; };
-		28190F09293A5372007640AA /* SwiftCoroutine in Frameworks */ = {isa = PBXBuildFile; productRef = 28190F08293A5372007640AA /* SwiftCoroutine */; };
 		28190F0C293A5449007640AA /* ApplicationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F0B293A5449007640AA /* ApplicationError.swift */; };
 		28190F10293A55D0007640AA /* AuthenticatedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F0F293A55D0007640AA /* AuthenticatedViewModel.swift */; };
 		28190F12293A560D007640AA /* UnauthenticatedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F11293A560D007640AA /* UnauthenticatedViewModel.swift */; };
@@ -33,6 +32,7 @@
 		28190F16293A6186007640AA /* TokenState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F15293A6186007640AA /* TokenState.swift */; };
 		28190F19293A68DC007640AA /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F18293A68DC007640AA /* ErrorView.swift */; };
 		28190F1B293A68EA007640AA /* ErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F1A293A68EA007640AA /* ErrorViewModel.swift */; };
+		28D73D7E293B80A700EFA01B /* AuthorizationResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D73D7D293B80A700EFA01B /* AuthorizationResponseHandler.swift */; };
 		28DE1484293A76540091424F /* NonceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DE1483293A76540091424F /* NonceResponse.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +62,7 @@
 		28190F15293A6186007640AA /* TokenState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenState.swift; sourceTree = "<group>"; };
 		28190F18293A68DC007640AA /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		28190F1A293A68EA007640AA /* ErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewModel.swift; sourceTree = "<group>"; };
+		28D73D7D293B80A700EFA01B /* AuthorizationResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationResponseHandler.swift; sourceTree = "<group>"; };
 		28DE1483293A76540091424F /* NonceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonceResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,7 +72,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				28190F06293A5319007640AA /* AppAuth in Frameworks */,
-				28190F09293A5372007640AA /* SwiftCoroutine in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,8 +101,8 @@
 		28190ED0293A150F007640AA /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				28190F0A293A5439007640AA /* Errors */,
 				28190EED293A2C7D007640AA /* Configuration */,
+				28190F0A293A5439007640AA /* Errors */,
 				28190EFF293A4E9C007640AA /* Views */,
 				28190EE6293A23E5007640AA /* WebView */,
 				28190EF6293A373A007640AA /* OAuth */,
@@ -152,9 +152,10 @@
 			isa = PBXGroup;
 			children = (
 				28190EF7293A3788007640AA /* AppAuthHandler.swift */,
+				28D73D7D293B80A700EFA01B /* AuthorizationResponseHandler.swift */,
 				28190EFB293A3828007640AA /* NonceService.swift */,
-				28190F15293A6186007640AA /* TokenState.swift */,
 				28DE1483293A76540091424F /* NonceResponse.swift */,
+				28190F15293A6186007640AA /* TokenState.swift */,
 			);
 			path = OAuth;
 			sourceTree = "<group>";
@@ -224,7 +225,6 @@
 			name = mobileweb;
 			packageProductDependencies = (
 				28190F05293A5319007640AA /* AppAuth */,
-				28190F08293A5372007640AA /* SwiftCoroutine */,
 			);
 			productName = mobileweb;
 			productReference = 28190ECE293A150F007640AA /* mobileweb.app */;
@@ -256,7 +256,6 @@
 			mainGroup = 28190EC5293A150F007640AA;
 			packageReferences = (
 				28190F04293A5319007640AA /* XCRemoteSwiftPackageReference "AppAuth-iOS" */,
-				28190F07293A5372007640AA /* XCRemoteSwiftPackageReference "SwiftCoroutine" */,
 			);
 			productRefGroup = 28190ECF293A150F007640AA /* Products */;
 			projectDirPath = "";
@@ -298,6 +297,7 @@
 				28190EE8293A240F007640AA /* WebViewCache.swift in Sources */,
 				28190F1B293A68EA007640AA /* ErrorViewModel.swift in Sources */,
 				28190ED2293A150F007640AA /* DemoApp.swift in Sources */,
+				28D73D7E293B80A700EFA01B /* AuthorizationResponseHandler.swift in Sources */,
 				28190F12293A560D007640AA /* UnauthenticatedViewModel.swift in Sources */,
 				28190EF8293A3788007640AA /* AppAuthHandler.swift in Sources */,
 				28190EFC293A3828007640AA /* NonceService.swift in Sources */,
@@ -515,14 +515,6 @@
 				minimumVersion = 1.6.0;
 			};
 		};
-		28190F07293A5372007640AA /* XCRemoteSwiftPackageReference "SwiftCoroutine" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/belozierov/SwiftCoroutine";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.1.11;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -530,11 +522,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 28190F04293A5319007640AA /* XCRemoteSwiftPackageReference "AppAuth-iOS" */;
 			productName = AppAuth;
-		};
-		28190F08293A5372007640AA /* SwiftCoroutine */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 28190F07293A5372007640AA /* XCRemoteSwiftPackageReference "SwiftCoroutine" */;
-			productName = SwiftCoroutine;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
