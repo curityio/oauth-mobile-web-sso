@@ -101,8 +101,7 @@ class AppAuthHandler {
     /*
      * Handle the authorization response, including the user closing the Chrome Custom Tab
      */
-    func redeemCodeForTokens(
-        authResponse: OIDAuthorizationResponse) async throws -> OIDTokenResponse {
+    func redeemCodeForTokens(authResponse: OIDAuthorizationResponse) async throws -> OIDTokenResponse {
             
         try await withCheckedThrowingContinuation { continuation in
             

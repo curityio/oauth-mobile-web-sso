@@ -54,7 +54,8 @@ struct WebView: UIViewRepresentable {
     }
 
     /*
-     * Load the view's content
+     * Load the view's content, which may result in an iOS internal warning being output to logs
+     * https://developer.apple.com/forums/thread/713290
      */
     func updateUIView(_ webview: WKWebView, context: Context) {
 

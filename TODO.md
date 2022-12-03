@@ -1,9 +1,3 @@
-## Mobile OAuth Flow
-
-- Use built-in Swift coroutines
-- Nonce should be created when the buttons are clicked, not on page load
-- Stop ngrok in the teardown script
-
 ## Web OAuth Flow
 
 - Debug using OAuth tools to sign in as the web client, and ensure that the authenticator is working

@@ -47,15 +47,12 @@ class UnauthenticatedViewModel: ObservableObject {
                 let metadata = try await self.appauth.fetchMetadata()
 
                 // Do the redirect on the UI thread, and no async handling can be done here
-                print("*** start main")
                 await MainActor.run {
 
-                    print("*** start redirect")
                     self.appauth.performAuthorizationRedirect(
                         metadata: metadata,
                         clientID: self.configuration.clientID,
                         viewController: ViewControllerAccessor.getRoot())
-                    print("*** end redirect")
                 }
 
                 // Process the authorization response on a background thread

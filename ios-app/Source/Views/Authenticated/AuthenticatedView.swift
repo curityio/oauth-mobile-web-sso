@@ -38,7 +38,14 @@ struct AuthenticatedView: View {
         return VStack {
 
             Button {
-                self.showModal = true
+                
+                Task {
+                    try await self.model.createNonce()
+                    await MainActor.run {
+                        self.showModal = true
+                    }
+                }
+                
             } label: {
                 Text("Run SPA in Web View")
             }
@@ -57,7 +64,6 @@ struct AuthenticatedView: View {
             }
             .buttonStyle(MenuButtonStyle(width: deviceWidth * 0.77))
         }
-        .onAppear(perform: self.model.createNonce)
     }
 
     /*
@@ -79,17 +85,31 @@ struct AuthenticatedView: View {
      */
     private func onInvokeSafariViewController() {
 
-        let safariConfiguration = SFSafariViewController.Configuration()
-        safariConfiguration.entersReaderIfAvailable = true
+        Task {
             
-        let safari = SFSafariViewController(url: self.model.getSpaUrl(), configuration: safariConfiguration)
-        ViewControllerAccessor.getRoot().present(safari, animated: true)
+            try await self.model.createNonce()
+            await MainActor.run {
+                
+                let safariConfiguration = SFSafariViewController.Configuration()
+                safariConfiguration.entersReaderIfAvailable = true
+                    
+                let safari = SFSafariViewController(url: self.model.getSpaUrl(), configuration: safariConfiguration)
+                ViewControllerAccessor.getRoot().present(safari, animated: true)
+            }
+        }
     }
 
     /*
      * Open the SPA in the system browser
      */
     private func onInvokeSystemBrowser() {
-        UIApplication.shared.open(self.model.getSpaUrl())
+        
+        Task {
+            
+            try await self.model.createNonce()
+            await MainActor.run {
+                UIApplication.shared.open(self.model.getSpaUrl())
+            }
+        }
     }
 }
