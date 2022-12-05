@@ -31,11 +31,11 @@ Applications running on mobile devices or emulators will then call these URLs:
 The Curity Identity Server Admin URL is at `http://localhost:6749/admin`.\
 Sign into the Admin UI with credentials `admin / Password1` to understand the OAuth settings.
 
-## Application Flow
+## Mobile Flow
 
 Run either the Android or IOS app, and an unauthenticated view will be shown:
 
-![unauthenticated view](./doc/unauthenticated-view.png)
+![unauthenticated mobile view](./doc/unauthenticated-mobile-view.png)
 
 Click the login button and sign in as `demouser / Password1`.\
 
@@ -43,6 +43,17 @@ Click the login button and sign in as `demouser / Password1`.\
 
 The authenticated view will then be presented, to navigate to a Single Page Application (SPA):
 
-![authenticated view](./doc/authenticated-view.png)
+![authenticated mobile view](./doc/authenticated-mobile view.png)
 
-A `nonce authenticator` is used, to avoid a second user login, and to enable the SPA to get its own tokens.
+## Web Flow
+
+The mobile app posts its ID token to the nonce authenticator in order to get a nonce.\
+It then passes the nonce in a query string parameter to the web app:
+
+![unauthenticated web view](./doc/unauthenticated-web-view.png)
+
+To visualize behavior, the web app does an initial render to indicate that it must redirect.\
+When the login link is clicked, the web app single signs on, without relying on shared cookies.\
+This would be done automatically in a real web app:
+
+![authenticated web view](./doc/authenticated-web-view.png)
