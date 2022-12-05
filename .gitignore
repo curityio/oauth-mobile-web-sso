@@ -6,6 +6,10 @@ data
 mobile-config.json
 build
 
+# Web
+node_modules
+dist
+
 # iOS
 xcuserdata
 *.hmap

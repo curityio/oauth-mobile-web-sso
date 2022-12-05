@@ -37,7 +37,7 @@ class AuthenticatedViewModel: ObservableObject {
     /*
      * Swap the ID token for a nonce on a background thread and return the SPA URL
      */
-    func createNonce() async throws -> Void {
+    func createNonce() async throws {
         
         do {
             let service = NonceService(configuration: self.configuration)

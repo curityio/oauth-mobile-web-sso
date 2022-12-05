@@ -17,7 +17,7 @@ services:
 # The SPA is loaded from the /spa external path
 #
 - name: webhost
-  url: http://webhost:3000
+  url: http://webhost:3000/spa
   routes:
   - name: webhost-route
     paths:

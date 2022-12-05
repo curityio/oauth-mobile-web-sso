@@ -1,10 +1,9 @@
 {
-  "baseUrl": "$RUNTIME_BASE_URL",
+  "baseUrl": "$BASE_URL",
   "issuerPath": "/oauth/v2/oauth-anonymous",
   "nonceAuthenticatorPath": "/authn/anonymous/nonce1",
   "clientID": "mobile-client",
   "redirectUri": "io.curity.client:/callback",
   "scope": "openid",
-  "spaPath": "/spa",
-  "nonceAuthenticatorPath": "/authn/anonymous/nonce1"
+  "spaPath": "/spa"
 }

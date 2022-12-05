@@ -24,6 +24,11 @@ services:
   web-host:
     image: webhost:1.35
     hostname: webhost
+    volumes:
+      - ./web-app/index.html:/home/static/spa/index.html
+      - ./web-app/dist:/home/static/spa/dist
+    profiles:
+      - FULL
 
   #
   # The Curity Identity Server is exposed by Kong via runtime and admin paths
@@ -40,7 +45,7 @@ services:
     environment:
       ADMIN: 'true'
       LOGGING_LEVEL: 'INFO'
-      RUNTIME_BASE_URL: "${RUNTIME_BASE_URL}"
+      BASE_URL: "${BASE_URL}"
       # A real system would not check the config encryption key into source control
       CONFIG_ENCRYPTION_KEY: '4fbfeb2d404a0bdef3f4e03cc5ec590d674740901a5806b3bd30083e14038113'
       

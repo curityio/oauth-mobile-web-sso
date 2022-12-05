@@ -17,7 +17,7 @@ fi
 #
 # Use an ngrok base URL unless one is provided as an environment variables
 #
-if [ "$RUNTIME_BASE_URL" == '' ]; then
+if [ "$BASE_URL" == '' ]; then
 
   ngrok version
   if [ $? -ne 0 ]; then
@@ -30,11 +30,18 @@ if [ "$RUNTIME_BASE_URL" == '' ]; then
     sleep 5
   fi
 
-  RUNTIME_BASE_URL=$(curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[] | select(.proto == "https") | .public_url')
-  if [ "$RUNTIME_BASE_URL" == "" ]; then
+  BASE_URL=$(curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[] | select(.proto == "https") | .public_url')
+  if [ "$BASE_URL" == "" ]; then
     echo 'Problem encountered getting an NGROK URL'
     exit 1
   fi
+fi
+
+#
+# Set a deployment profile
+#
+if [ "$DEPLOYMENT_PROFILE" == '' ]; then
+  DEPLOYMENT_PROFILE='FULL'
 fi
 
 #
@@ -43,13 +50,13 @@ fi
 rm -rf idsvr/data
 
 #
-# Set the final base URL
+# Set environment variables
 #
-echo "The internet base URL is: $RUNTIME_BASE_URL"
-export RUNTIME_BASE_URL
+echo "The base URL is: $BASE_URL"
+export BASE_URL
 
 #
-# Update mobile app configuration to use the runtime base URL
+# Update mobile app configuration to use the base URL
 #
 envsubst < ./ios-app/mobile-config-template.json > ./ios-app/mobile-config.json
 if [ $? -ne 0 ]; then
@@ -60,7 +67,7 @@ fi
 #
 # Run the docker deployment
 #
-docker compose --project-name mobileweb up --force-recreate --detach
+docker compose --profile $DEPLOYMENT_PROFILE --project-name mobileweb up --force-recreate --detach
 if [ $? -ne 0 ]; then
   echo 'Problem encountered deploying components to Docker'
   exit 1

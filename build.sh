@@ -13,13 +13,37 @@ rm -rf resources 2>/dev/null
 cp ./hooks/pre-commit ./.git/hooks
 
 #
-# Build the web host
+# Build the web content
 #
-docker build -f web-app/Dockerfile -t webhost:1.35 .
+cd web-app
+if [ -d 'node_modules' ]; then
+  npm install
+  if [ $? -ne 0 ]; then
+    echo 'Problem encountered installing SPA dependencies'
+    exit 1
+  fi
+fi
+
+npm run build
+if [ $? -ne 0 ]; then
+  echo 'Problem encountered building the SPA'
+  exit 1
+fi
+
+#
+# Build the Dockerfile for the web host
+#
+docker build -t webhost:1.35 .
+if [ $? -ne 0 ]; then
+  echo 'Problem encountered building the nonce authenticator'
+  exit 1
+fi
+cd ..
 
 #
 # Download the nonce authenticator
 #
+rm -rf resources 2>/dev/null
 mkdir resources
 cd resources
 git clone https://github.com/curityio/nonce-authenticator
