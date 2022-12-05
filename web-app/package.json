@@ -1,0 +1,26 @@
+{
+    "name": "browser-based-app",
+    "version": "1.0.0",
+    "description": "A minimal secured SPA invoked from a mobile app",
+    "main": "app.ts",
+    "scripts": {
+        "start": "webpack --watch",
+        "build": "webpack",
+        "clean": "rimraf dist/*bundle*"
+    },
+    "keywords": [],
+    "author": "Gary Archer",
+    "license": "MIT",
+    "dependencies": {
+        "axios": "^1.2.0",
+        "url-parse": "^1.5.9"
+    },
+    "devDependencies": {
+        "@types/url-parse": "^1.4.4",
+        "rimraf": "^3.0.2",
+        "ts-loader": "^9.2.6",
+        "typescript": "^4.7.2",
+        "webpack": "^5.72.1",
+        "webpack-cli": "^4.9.2"
+    }
+}

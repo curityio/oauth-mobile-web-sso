@@ -1,0 +1,34 @@
+_format_version: '2.1'
+_transform: true
+
+services:
+
+#
+# The default route hits the runtime node of the Curity Identity Server
+#
+- name: idsvr
+  url: http://identityserver:8443
+  routes:
+  - name: idsvr-runtime-route
+    paths:
+    - /
+
+#
+# The browser loads the SPA using the /spa external path
+#
+- name: webhost
+  url: http://webhost:3000/spa
+  routes:
+  - name: webhost-route
+    paths:
+    - /spa
+
+#
+# The browser calls the OAuth Agent using the /oauth-agent external path
+#
+- name: oauth-agent
+  url: http://oauthagent:3001/oauth-agent
+  routes:
+  - name: oauth-agent-route
+    paths:
+    - /oauth-agent

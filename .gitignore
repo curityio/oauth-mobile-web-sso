@@ -1,18 +1,18 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
+# General
+license.json
+.DS_Store
+resources
+data
+mobile-config.json
+build
 
-# Other files and folders
-.settings/
+# Web
+node_modules
+dist
 
-# Executables
-*.swf
-*.air
+# iOS
+xcuserdata
+*.hmap
 *.ipa
-*.apk
-
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+*.dSYM.zip
+*.dSYM

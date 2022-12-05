@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+
+        <title>Browser Based App</title>
+    </head>
+    <body>
+        <div id='root' />
+
+        <!-- 
+            During web development, run npm start, after which you can test in a mobile browser
+            To do so, set new 't' query parameters to force a download on the mobile device
+        -->
+        <script type='module' src='dist/vendor.bundle.js?t=1'></script>
+        <script type='module' src='dist/app.bundle.js?t=1'></script>
+    </body>
+</html>

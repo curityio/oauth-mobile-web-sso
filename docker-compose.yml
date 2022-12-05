@@ -1,0 +1,84 @@
+version: '3.8'
+services:
+
+  #
+  # The reverse proxy is the only host exposed to the internet and the mobile emulator or device
+  #
+  reverse-proxy:
+    image: kong:3.0.0
+    hostname: reverseproxy
+    ports:
+      - 80:3000
+    volumes:
+      - ./reverse-proxy/kong.yml:/usr/local/kong/declarative/kong.yml
+      - ./web-app/:/usr/local/kong/web-app/
+    environment:
+      KONG_DATABASE: 'off'
+      KONG_DECLARATIVE_CONFIG: '/usr/local/kong/declarative/kong.yml'
+      KONG_PROXY_LISTEN: '0.0.0.0:3000'
+      KONG_LOG_LEVEL: 'info'
+
+  #
+  # The web host serves static content from the local computer
+  #
+  web-host:
+    image: webhost:1.35
+    hostname: webhost
+    volumes:
+      - ./web-app/index.html:/home/static/spa/index.html
+      - ./web-app/dist:/home/static/spa/dist
+
+  #
+  # The OAuth agent implements OpenID Connect for the SPA
+  #
+  oauth-agent:
+    image: oauthagent:1.0
+    hostname: oauthagent
+    environment:
+      PORT: 3001
+      TRUSTED_WEB_ORIGIN: "${BASE_URL}"
+      AUTHORIZE_ENDPOINT: "${BASE_URL}/oauth/v2/oauth-authorize"
+      LOGOUT_ENDPOINT: '${BASE_URL}/oauth/v2/oauth-session/logout'
+      TOKEN_ENDPOINT: '${INTERNAL_IDVSR_BASE_URL}/oauth/v2/oauth-token'
+      USERINFO_ENDPOINT: '${INTERNAL_IDVSR_BASE_URL}/oauth/v2/oauth-userinfo'
+      CLIENT_ID: 'web-client'
+      REDIRECT_URI: "${BASE_URL}/spa"
+      POST_LOGOUT_REDIRECT_URI: '${BASE_URL}/spa'
+      SCOPE: 'openid'
+      COOKIE_DOMAIN: '${SPA_COOKIE_DOMAIN}'
+      COOKIE_NAME_PREFIX: 'example'
+      COOKIE_ENCRYPTION_KEY: "${SPA_COOKIE_ENCRYPTION_KEY}"
+      CORS_ENABLED: 'false'
+
+  #
+  # The Curity Identity Server is exposed by Kong via runtime and admin paths
+  #
+  curity-idsvr:
+    image: curity.azurecr.io/curity/idsvr:7.5.1
+    hostname: identityserver
+    ports:
+      - 6749:6749
+    volumes:
+     - ./idsvr/license.json:/opt/idsvr/etc/init/license/license.json
+     - ./idsvr/config-backup.xml:/opt/idsvr/etc/init/config.xml
+     - ./resources/nonce-authenticator/target:/opt/idsvr/usr/share/plugins/nonce-authenticator
+    environment:
+      ADMIN: 'true'
+      LOGGING_LEVEL: 'INFO'
+      BASE_URL: "${BASE_URL}"
+      # A real system would not check the config encryption key into source control
+      CONFIG_ENCRYPTION_KEY: '4fbfeb2d404a0bdef3f4e03cc5ec590d674740901a5806b3bd30083e14038113'
+      
+  #
+  # The database for the Curity Identity Server, with a fixed user account
+  #
+  curity-data:
+    image: postgres:14.5
+    hostname: dbserver
+    volumes:
+      - ./idsvr/data:/var/lib/postgresql/data
+      - ./idsvr/data-backup.sql:/docker-entrypoint-initdb.d/data-backup.sql
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'Password1'
+      POSTGRES_DB: 'idsvr'
