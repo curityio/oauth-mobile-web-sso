@@ -33,7 +33,7 @@ Sign into the Admin UI with credentials `admin / Password1` to understand the O
 
 ## Mobile Flow
 
-Run either the Android or IOS app, and an unauthenticated view will be shown:
+Run the IOS app, and an unauthenticated view will be shown:
 
 ![unauthenticated mobile view](./doc/unauthenticated-mobile-view.png)
 
