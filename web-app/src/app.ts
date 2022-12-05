@@ -25,18 +25,17 @@ class App {
         
             TitleView.render();
 
-            const isAuthenticated = await this.oauthClient.endLogin();
-            if (!isAuthenticated) {
+            // Do an automatic login redirect if required
+            if (!await this.oauthClient.autoLogin()) {
 
-                this.unauthenticatedView.render();
-
-            } else {
-
-                const hasValidCookie = await this.authenticatedView.loadSubject();
-                if (hasValidCookie) {
+                // Call the OAuth agent to determine the authentication state and subject
+                const isAuthenticated = await this.oauthClient.load();
+                
+                // Call the appropriate view
+                if (isAuthenticated) {
                     this.authenticatedView.render();
                 } else {
-                    this.unauthenticatedView.render();    
+                    this.unauthenticatedView.render();
                 }
             }
 

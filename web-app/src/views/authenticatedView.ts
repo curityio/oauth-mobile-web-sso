@@ -9,30 +9,12 @@ import {Utils} from './utils';
 export class AuthenticatedView {
 
     private readonly oauthClient: OAuthClient;
-    private subject: string;
 
     public constructor(oauthClient: OAuthClient) {
 
         this.oauthClient = oauthClient;
-        this.subject = '';
         Utils.createContainer(Elements.Main);
         this.setupCallbacks();
-    }
-
-    /*
-     * Retrieve userinfo when the view loads
-     */
-    public async loadSubject(): Promise<Boolean> {
-
-        try {
-            this.subject = await this.oauthClient.getSubject();
-            return true;
-
-        } catch (e: any) {
-
-            ErrorView.render(e);
-            return false;
-        }
     }
 
     /*
@@ -41,7 +23,7 @@ export class AuthenticatedView {
     public render() {
 
         const html = `<div>
-                        <p>User is authenticated: ${this.subject}<p>
+                        <p>User is authenticated: ${this.oauthClient.getSubject()}<p>
                         <p>Click <a id='btnLogout' href='#'>here</a> to sign out</p>
                       </div>`;
         

@@ -8,6 +8,7 @@ export class OAuthClient {
 
     private baseUrl: string;
     private nonce: string;
+    private subject: string;
     private antiForgeryToken: string;
     
     public constructor() {
@@ -15,6 +16,38 @@ export class OAuthClient {
         this.baseUrl = `${location.origin}/oauth-agent`;
         this.antiForgeryToken = '';
         this.nonce = urlparse(location.href, true).query.nonce || '';
+        this.subject = '';
+    }
+
+    /*
+     * Ask the OAuth client to initialize
+     */
+    public async autoLogin(): Promise<Boolean> {
+        
+        if (this.nonce) {
+
+            await this.startLogin();
+            return true;
+        }
+
+        return false;
+    }
+
+    /*
+     * See if we are authenticated, and cookies are not expired
+     */
+    public async load(): Promise<Boolean> {
+
+        let isAuthenticated = await this.endLogin();
+        if (isAuthenticated) {
+            
+            this.subject = await this.loadSubject();
+            if (!this.subject) {
+                isAuthenticated = false;
+            }
+        }
+
+        return isAuthenticated;
     }
 
     /*
@@ -27,9 +60,25 @@ export class OAuthClient {
     }
 
     /*
+     * Return the subject for display
+     */
+    public getSubject(): string {
+        return this.subject;
+    }
+
+    /*
+     * Sign the user out
+     */
+    public async logout(): Promise<void> {
+
+        const data = await this.fetch('POST', 'logout', null);
+        location.href = data.url;
+    }
+
+    /*
      * End a login if required, and return the authenticated state
      */
-    public async endLogin(): Promise<Boolean> {
+    private async endLogin(): Promise<Boolean> {
 
         const request = JSON.stringify({
             pageUrl: location.href,
@@ -47,7 +96,7 @@ export class OAuthClient {
     /*
      * Get the logged in subject as a very basic way of displaying the user
      */
-    public async getSubject(): Promise<string> {
+    private async loadSubject(): Promise<string> {
         
         const claims = await this.fetch('GET', 'userInfo', null);
         if (claims.sub) {
@@ -55,15 +104,6 @@ export class OAuthClient {
         }
 
         return '';
-    }
-
-    /*
-     * Sign the user out
-     */
-    public async logout(): Promise<void> {
-
-        const data = await this.fetch('POST', 'logout', null);
-        location.href = data.url;
     }
 
     /*

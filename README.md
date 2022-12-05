@@ -45,15 +45,8 @@ The authenticated view will then be presented, to navigate to a Single Page Appl
 
 ![authenticated mobile view](./doc/authenticated-mobile-view.png)
 
-## Web Flow
-
 The mobile app posts its ID token to the nonce authenticator in order to get a nonce.\
 It then passes the nonce in a query string parameter to the web app.\
-To visualize behavior, the web app does an initial render to indicate that it must redirect.\
-
-![unauthenticated web view](./doc/unauthenticated-web-view.png)
-
-When the login link is clicked, the web app single signs on, without relying on shared cookies.\
-This redirect would be done automatically in a real web app:
+The web app then single signs on, without relying on shared cookies:
 
 ![authenticated web view](./doc/authenticated-web-view.png)

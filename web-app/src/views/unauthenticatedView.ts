@@ -18,14 +18,14 @@ export class UnauthenticatedView {
     }
 
     /*
-     * Render a button so that we can trigger a redirect
+     * Render a button so that we can trigger a redirect manually
      */
     public render() {
 
         const html = `<div>
                         <p>User is unauthenticated<p>
                         <p>Click <a id='btnLogin' href='#'>here</a> to sign in</p>
-                      </div>`;
+                    </div>`;
 
         Utils.setContainerContent(Elements.Main, html);
         document.querySelector('#btnLogin')?.addEventListener('click', this.onLogin);
