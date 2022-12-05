@@ -10,6 +10,7 @@ docker compose --project-name mobileweb down
 #
 # Free ngrok resources if required
 #
-if [ "$BASE_URL" == '' ]; then
-    kill -9 $(pgrep ngrok) 2>/dev/null
+NGROK_PID="$(pgrep ngrok)"
+if [ "$NGROK_PID" != '' ]; then
+    kill -9 $NGROK_PID 2>/dev/null
 fi
