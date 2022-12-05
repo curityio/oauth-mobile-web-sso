@@ -1,5 +1,3 @@
-- Get local setup working for web development and add a sub README on local development
-- Deploy oauth-agent
 - SPA minimal unauthenticated and authenticated views
 - Debug nonce authenticator
 - Do I need WebViewCache?

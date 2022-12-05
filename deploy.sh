@@ -15,7 +15,7 @@ if [ ! -f './idsvr/license.json' ]; then
 fi
 
 #
-# Use an ngrok base URL unless one is provided as an environment variables
+# Use an ngrok base URL unless one is provided as an environment variable
 #
 if [ "$BASE_URL" == '' ]; then
 
@@ -38,18 +38,6 @@ if [ "$BASE_URL" == '' ]; then
 fi
 
 #
-# Set a deployment profile
-#
-if [ "$DEPLOYMENT_PROFILE" == '' ]; then
-  DEPLOYMENT_PROFILE='FULL'
-fi
-
-#
-# Clear leftover data on the Docker shared volume
-#
-rm -rf idsvr/data
-
-#
 # Set environment variables
 #
 echo "The base URL is: $BASE_URL"
@@ -65,9 +53,21 @@ if [ $? -ne 0 ]; then
 fi
 
 #
+# Supply OAuth agent environment variables
+#
+export SPA_COOKIE_DOMAIN="$(echo $BASE_URL | awk -F/ '{print $3}')"
+export SPA_COOKIE_ENCRYPTION_KEY=$(openssl rand 32 | xxd -p -c 64)
+export INTERNAL_IDVSR_BASE_URL='http://identityserver:8443'
+
+#
+# Clear leftover data on the Docker shared volume
+#
+rm -rf idsvr/data
+
+#
 # Run the docker deployment
 #
-docker compose --profile $DEPLOYMENT_PROFILE --project-name mobileweb up --force-recreate --detach
+docker compose --project-name mobileweb up --force-recreate --detach
 if [ $? -ne 0 ]; then
   echo 'Problem encountered deploying components to Docker'
   exit 1

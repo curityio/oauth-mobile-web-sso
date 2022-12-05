@@ -41,7 +41,7 @@ fi
 cd ..
 
 #
-# Download the nonce authenticator
+# Build the nonce authenticator and keep only JAR files in the target folder
 #
 rm -rf resources 2>/dev/null
 mkdir resources
@@ -52,9 +52,6 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-#
-# Build it and keep only the JAR files, so that we can deploy the target folder as a Docker volume
-#
 cd nonce-authenticator
 mvn package
 if [ $? -ne 0 ]; then
@@ -64,8 +61,33 @@ fi
 rm -rf target/classes
 rm -rf target/generated-sources
 rm -rf target/maven-*
-cd ../..
+cd ..
 
 #
 # Build the OAuth agent
 #
+git clone https://github.com/curityio/oauth-agent-node-express oauthagent
+if [ $? -ne 0 ]; then
+  echo 'Problem encountered downloading the OAuth agent'
+  exit 1
+fi
+
+cd oauthagent
+npm install
+if [ $? -ne 0 ]; then
+  echo "Problem encountered installing the OAuth Agent dependencies"
+  exit 1
+fi
+
+npm run build
+if [ $? -ne 0 ]; then
+  echo "Problem encountered building the OAuth Agent code"
+  exit 1
+fi
+
+docker build -t oauthagent:1.0 .
+if [ $? -ne 0 ]; then
+  echo "Problem encountered building the OAuth Agent Docker image"
+  exit 1
+fi
+cd ..

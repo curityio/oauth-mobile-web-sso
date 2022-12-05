@@ -14,7 +14,7 @@ services:
     - /
 
 #
-# The SPA is loaded from the /spa external path
+# The browser loads the SPA using the /spa external path
 #
 - name: webhost
   url: http://webhost:3000/spa
@@ -22,3 +22,13 @@ services:
   - name: webhost-route
     paths:
     - /spa
+
+#
+# The browser calls the OAuth Agent using the /oauth-agent external path
+#
+- name: oauth-agent
+  url: http://oauthagent:3001/oauth-agent
+  routes:
+  - name: oauth-agent-route
+    paths:
+    - /oauth-agent

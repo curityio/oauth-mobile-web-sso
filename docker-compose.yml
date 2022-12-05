@@ -19,7 +19,7 @@ services:
       KONG_LOG_LEVEL: 'info'
 
   #
-  # The web host serves static content
+  # The web host serves static content from the local computer
   #
   web-host:
     image: webhost:1.35
@@ -27,8 +27,28 @@ services:
     volumes:
       - ./web-app/index.html:/home/static/spa/index.html
       - ./web-app/dist:/home/static/spa/dist
-    profiles:
-      - FULL
+
+  #
+  # The OAuth agent implements OpenID Connect for the SPA
+  #
+  oauth-agent:
+    image: oauthagent:1.0
+    hostname: oauthagent
+    environment:
+      PORT: 3001
+      TRUSTED_WEB_ORIGIN: "${BASE_URL}"
+      AUTHORIZE_ENDPOINT: "${BASE_URL}/oauth/v2/oauth-authorize"
+      LOGOUT_ENDPOINT: '${BASE_URL}/oauth/v2/oauth-session/logout'
+      TOKEN_ENDPOINT: '${INTERNAL_IDVSR_BASE_URL}/oauth/v2/oauth-token'
+      USERINFO_ENDPOINT: '${INTERNAL_IDVSR_BASE_URL}/oauth/v2/oauth-userinfo'
+      CLIENT_ID: 'web-client'
+      REDIRECT_URI: "${BASE_URL}/spa"
+      POST_LOGOUT_REDIRECT_URI: '${BASE_URL}/spa'
+      SCOPE: 'openid'
+      COOKIE_DOMAIN: '${SPA_COOKIE_DOMAIN}'
+      COOKIE_NAME_PREFIX: 'example'
+      COOKIE_ENCRYPTION_KEY: "${SPA_COOKIE_ENCRYPTION_KEY}"
+      CORS_ENABLED: 'false'
 
   #
   # The Curity Identity Server is exposed by Kong via runtime and admin paths
