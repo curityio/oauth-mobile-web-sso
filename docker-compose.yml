@@ -52,7 +52,7 @@ services:
       CORS_ENABLED: 'false'
 
   #
-  # The Curity Identity Server is exposed by Kong via runtime and admin paths
+  # The Curity Identity Server runtime node is exposed via Kong, and the admin node is at http://localhost:6749/admin
   #
   curity-idsvr:
     image: curity.azurecr.io/curity/idsvr:7.5.1
