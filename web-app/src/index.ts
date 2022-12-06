@@ -14,14 +14,16 @@
 // limitations under the License.
 //
 
-/*
- * Element identifiers
- */
-export class Elements {
+import {App} from './app';
+import {IframeApp} from './iframeApp';
 
-    public static readonly Root = 'root';
-    public static readonly Title = 'title';
-    public static readonly Error = 'error';
-    public static readonly Main = 'main';
-    public static readonly Iframe = 'iframe';
+if (window.top === window.self) {
+
+    const app = new App();
+    app.execute();
+
+} else {
+
+    const app = new IframeApp();
+    app.execute();
 }

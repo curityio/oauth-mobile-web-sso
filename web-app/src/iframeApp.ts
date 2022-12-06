@@ -15,13 +15,16 @@
 //
 
 /*
- * Element identifiers
+ * The iframe app's only role is to receive an OpenID Connect response
  */
-export class Elements {
+export class IframeApp {
 
-    public static readonly Root = 'root';
-    public static readonly Title = 'title';
-    public static readonly Error = 'error';
-    public static readonly Main = 'main';
-    public static readonly Iframe = 'iframe';
+    /*
+     * Use the post message API to notify the parent window
+     */
+    public execute() {
+
+        console.log(`DEBUG SPA: silent login response: ${location.href}`);
+        window.parent.postMessage(location.href);
+    }
 }

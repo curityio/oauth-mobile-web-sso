@@ -7,7 +7,7 @@ module.exports = {
   mode: 'production',
   
   entry: {
-    app: ['./app.ts']
+    app: ['./index.ts']
   },
   module: {
     rules: [

@@ -2,7 +2,7 @@
     "name": "browser-based-app",
     "version": "1.0.0",
     "description": "A minimal secured SPA invoked from a mobile app",
-    "main": "app.ts",
+    "main": "index.ts",
     "scripts": {
         "start": "webpack --watch",
         "build": "webpack",

@@ -334,6 +334,7 @@
                   <authenticator-filters>nonce-filter</authenticator-filters>
                   <allowed-post-logout-redirect-uris>#{BASE_URL}/spa</allowed-post-logout-redirect-uris>
                 </user-authentication>
+                <allowed-origins>#{BASE_URL}</allowed-origins>
                 <capabilities>
                   <code>
                   </code>

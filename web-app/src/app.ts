@@ -20,7 +20,10 @@ import {ErrorView} from './views/errorView';
 import {AuthenticatedView} from './views/authenticatedView';
 import {UnauthenticatedView} from './views/unauthenticatedView';
 
-class App {
+/*
+ * The visible SPA application
+ */
+export class App {
 
     private readonly unauthenticatedView: UnauthenticatedView;
     private readonly authenticatedView: AuthenticatedView;
@@ -41,14 +44,11 @@ class App {
         
             TitleView.render();
 
-            if (!await this.oauthClient.autoLogin()) {
-
-                const isAuthenticated = await this.oauthClient.load();
-                if (isAuthenticated) {
-                    this.authenticatedView.render();
-                } else {
-                    this.unauthenticatedView.render();
-                }
+            const isAuthenticated = await this.oauthClient.load();
+            if (isAuthenticated) {
+                this.authenticatedView.render();
+            } else {
+                this.unauthenticatedView.render();
             }
 
         } catch (e: any) {
@@ -57,6 +57,3 @@ class App {
         }
     }
 }
-
-const app = new App();
-app.execute();

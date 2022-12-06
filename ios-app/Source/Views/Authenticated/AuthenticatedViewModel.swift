@@ -45,7 +45,7 @@ class AuthenticatedViewModel: ObservableObject {
             
             await MainActor.run {
                 self.tokenState.nonce = nonce
-                print("Nonce issued: \(self.tokenState.nonce)")
+                print("DEBUG: nonce issued: \(self.tokenState.nonce)")
             }
 
         } catch {

@@ -25,15 +25,15 @@ Applications running on mobile devices or emulators will then call these URLs:
 
 | Component | Internet URL |
 | --------- | ------------ |
-| Web Application | https://c7b9-2-26-158-168.eu.ngrok.io/spa |
+| Single Page Application | https://c7b9-2-26-158-168.eu.ngrok.io/spa |
 | Curity Identity Server Runtime URL | https://c7b9-2-26-158-168.eu.ngrok.io |
 
 The Curity Identity Server Admin URL is at `http://localhost:6749/admin`.\
 Sign into the Admin UI with credentials `admin / Password1` to understand the OAuth settings.
 
-## Mobile Flow
+## Application Flow
 
-Run the IOS app, and an unauthenticated view will be shown:
+Run the IOS app from Xcode, and an unauthenticated view will be shown:
 
 ![unauthenticated mobile view](./doc/unauthenticated-mobile-view.png)
 
@@ -45,8 +45,20 @@ The authenticated view will then be presented, to navigate to a Single Page Appl
 
 ![authenticated mobile view](./doc/authenticated-mobile-view.png)
 
-The mobile app posts its ID token to the nonce authenticator in order to get a nonce.\
-It then passes the nonce in a query string parameter to the web app.\
-The web app then single signs on, without relying on shared cookies:
+The mobile app posts its ID token to the nonce authenticator in order to get a one-time token.\
+It then passes the nonce in a query string parameter to the SPA, when loading it in a browser.\
+The SPA then authenticates silently with the nonce authenticator, using a hidden iframe:
 
 ![authenticated web view](./doc/authenticated-web-view.png)
+
+## Website Documentation
+
+See the following resources for further information:
+
+- [Mobile Web Integration Tutorial](https://curity.io/resources/learn/mobile-web-integration-example)
+- [Nonce Authenticator Pattern](https://curity.io/resources/learn/nonce-authenticator-pattern)
+- [Nonce Authenticator Plugin](https://github.com/curityio/nonce-authenticator)
+
+## More Information
+
+Please visit [curity.io](https://curity.io/) for more information about the Curity Identity Server.

@@ -16,6 +16,7 @@
 
 import axios, {AxiosRequestConfig, AxiosRequestHeaders, Method} from 'axios';
 import urlparse from 'url-parse';
+import {Utils} from './views/utils';
 
 /*
  * A utility to interact with the OAuth agent to manage authentication
@@ -23,38 +24,42 @@ import urlparse from 'url-parse';
 export class OAuthClient {
 
     private baseUrl: string;
-    private nonce: string;
     private subject: string;
     private antiForgeryToken: string;
     
+    /*
+     * Load a nonce
+     */
     public constructor() {
         
         this.baseUrl = `${location.origin}/oauth-agent`;
         this.antiForgeryToken = '';
-        this.nonce = urlparse(location.href, true).query.nonce || '';
         this.subject = '';
     }
 
     /*
-     * Ask the OAuth client to initialize
-     */
-    public async autoLogin(): Promise<Boolean> {
-        
-        if (this.nonce) {
-
-            await this.startLogin();
-            return true;
-        }
-
-        return false;
-    }
-
-    /*
-     * See if we are authenticated, and cookies are not expired
+     * Handle the page load
      */
     public async load(): Promise<Boolean> {
 
-        let isAuthenticated = await this.endLogin();
+        // Do an automatic silent login on an iframe if there is a nonce query parameter
+        let pageUrl = location.href;
+        const nonce = urlparse(location.href, true).query.nonce || '';
+        if (nonce) {
+            
+            try {
+
+                pageUrl = await this.startSilentLogin(nonce);
+
+            } catch (e: any) {
+
+                console.log(`DEBUG SPA: silent login error: ${e}`)
+                return false;
+            }
+        }
+        
+        // End a login if required, using the current page URL, then load the current user if applicable
+        let isAuthenticated = await this.endLogin(pageUrl);
         if (isAuthenticated) {
             
             this.subject = await this.loadSubject();
@@ -67,13 +72,87 @@ export class OAuthClient {
     }
 
     /*
-     * Start a login redirect
+     * End a login if required, and return the authenticated state
+     */
+    private async endLogin(pageUrl: string): Promise<Boolean> {
+
+        const request = JSON.stringify({
+            pageUrl,
+        });
+
+        const response = await this.fetch('POST', 'login/end', request);
+        if (response.handled) {
+            history.replaceState({}, document.title, '/spa');
+        }
+
+        this.antiForgeryToken = response.csrf;
+        return response.isLoggedIn;
+    }
+
+    /*
+     * Start a silent login when using nonce based single sign on
+     */
+    private async startSilentLogin(nonce: string): Promise<string> {
+
+        const data = await this.fetch('POST', 'login/start', this.getSilentLoginOptions(nonce));
+        console.log(`DEBUG SPA: silent login redirect: ${data.authorizationRequestUrl}`);
+        
+        const frame = Utils.createHiddenIframe();
+        frame.src = data.authorizationRequestUrl;
+
+        return new Promise((resolve, reject) => {
+
+            const callback = (e: MessageEvent) => {
+                
+                try {
+                    resolve(this.handleSilentLoginResponse(e));
+                } catch (e) {
+                    reject(e);
+                }
+            };
+
+            window.addEventListener('message', callback, false);
+        });
+    }
+
+    /*
+     * Do the work of completing the silent login response
+     */
+    private handleSilentLoginResponse(e: MessageEvent): string {
+
+        const frame = Utils.removeHiddenIframe();
+        window.removeEventListener('message', this.handleSilentLoginResponse);
+        
+        if (e.data && e.data.status === 'error') {
+            
+            const errorDescription = e.data.error_description || 'authentication failed';
+            throw Error(`Silent login error: ${errorDescription}`);
+        }
+
+        return e.data;
+    }
+
+    /*
+     * Start a login redirect on the main page
      */
     public async startLogin(): Promise<void> {
 
         const data = await this.fetch('POST', 'login/start', this.getLoginOptions());
-        console.log(`*** SPA login redirect: ${data.authorizationRequestUrl}`);
+        console.log(`DEBUG SPA: login redirect: ${data.authorizationRequestUrl}`);
         location.href = data.authorizationRequestUrl;
+    }
+
+    /*
+     * Get the logged in subject as a very basic way of displaying the user
+     */
+    private async loadSubject(): Promise<string> {
+        
+        const claims = await this.fetch('GET', 'userInfo', null);
+        if (claims.sub) {
+            return claims.sub;
+        }
+
+        return '';
     }
 
     /*
@@ -89,39 +168,8 @@ export class OAuthClient {
     public async logout(): Promise<void> {
 
         const data = await this.fetch('POST', 'logout', null);
-        console.log(`*** SPA logout redirect: ${data.url}`);
+        console.log(`DEBUG SPA: logout redirect: ${data.url}`);
         location.href = data.url;
-    }
-
-    /*
-     * End a login if required, and return the authenticated state
-     */
-    private async endLogin(): Promise<Boolean> {
-
-        const request = JSON.stringify({
-            pageUrl: location.href,
-        });
-
-        const response = await this.fetch('POST', 'login/end', request);
-        if (response.handled) {
-            history.replaceState({}, document.title, '/spa');
-        }
-
-        this.antiForgeryToken = response.csrf;
-        return response.isLoggedIn;
-    }
-
-    /*
-     * Get the logged in subject as a very basic way of displaying the user
-     */
-    private async loadSubject(): Promise<string> {
-        
-        const claims = await this.fetch('GET', 'userInfo', null);
-        if (claims.sub) {
-            return claims.sub;
-        }
-
-        return '';
     }
 
     /*
@@ -151,34 +199,46 @@ export class OAuthClient {
 
         const response = await axios.request(options);
         return response.data;
-    }
+    } 
 
     /*
-     * Get additional redirect options
+    * Get main page redirect options for the demo app
+    */
+   private getLoginOptions(): any {
+
+       let extraParams = [];
+       
+       extraParams.push({
+           key: 'prompt',
+           value: 'login',
+       });
+
+       return {
+           extraParams,
+       };
+   }
+
+    /*
+     * Get nonce based redirect options
      */
-    private getLoginOptions(): any {
+    private getSilentLoginOptions(nonce: string): any {
 
         let extraParams = [];
         
-        // Always force a login to override values in SSO cookies
         extraParams.push({
             key: 'prompt',
             value: 'login',
         });
 
-        // Force use of the nonce authenticator when the SPA is invoked with a nonce query parameter
-        if (this.nonce) {
+        extraParams.push({
+            key: 'acr_values',
+            value: 'urn:se:curity:authentication:nonce:nonce1',
+        });
 
-            extraParams.push({
-                key: 'acr_values',
-                value: 'urn:se:curity:authentication:nonce:nonce1',
-            });
-
-            extraParams.push({
-                key: 'login_hint',
-                value: this.nonce,
-            });
-        }
+        extraParams.push({
+            key: 'login_hint',
+            value: nonce,
+        });
 
         return {
             extraParams,
