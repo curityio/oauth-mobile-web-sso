@@ -9,7 +9,7 @@
         "clean": "rimraf dist/*bundle*"
     },
     "keywords": [],
-    "author": "Gary Archer",
+    "author": "Curity AB",
     "license": "MIT",
     "dependencies": {
         "axios": "^1.2.0",
