@@ -19,7 +19,7 @@ import urlparse from 'url-parse';
 import {Utils} from './views/utils';
 
 /*
- * A utility to interact with the OAuth agent to manage authentication
+ * Utility methods to interact with the OAuth agent to manage authentication
  */
 export class OAuthClient {
 
@@ -27,9 +27,6 @@ export class OAuthClient {
     private subject: string;
     private antiForgeryToken: string;
     
-    /*
-     * Load a nonce
-     */
     public constructor() {
         
         this.baseUrl = `${location.origin}/oauth-agent`;
@@ -133,7 +130,7 @@ export class OAuthClient {
     }
 
     /*
-     * Start a login redirect on the main page
+     * Start a login redirect on the main window
      */
     public async startLogin(): Promise<void> {
 
@@ -156,14 +153,14 @@ export class OAuthClient {
     }
 
     /*
-     * Return the subject for display
+     * Return the subject to the view for display
      */
     public getSubject(): string {
         return this.subject;
     }
 
     /*
-     * Sign the user out
+     * Trigger a login redirect to sign the user out
      */
     public async logout(): Promise<void> {
 
