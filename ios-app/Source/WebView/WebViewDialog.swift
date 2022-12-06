@@ -73,11 +73,6 @@ struct WebViewDialog: View {
      * Handle closing the modal dialog
      */
     private func onClose() {
-
-        // Clear the cached web view
-        WebViewCache.clear()
-
-        // Dismiss the dialog
         self.presentationMode.wrappedValue.dismiss()
     }
 }

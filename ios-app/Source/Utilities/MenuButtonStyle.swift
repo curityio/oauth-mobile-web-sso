@@ -36,7 +36,7 @@ struct MenuButtonStyle: ButtonStyle {
 
         configuration.label
             .frame(width: self.width, height: 40)
-            .foregroundColor(Color.black)
+            .foregroundColor(Color.white)
             .background(self.lightBlue)
             .font(self.buttonFont)
             .scaleEffect(configuration.isPressed ? 0.9 : 1.0)

@@ -72,8 +72,3 @@ if [ $? -ne 0 ]; then
   echo 'Problem encountered deploying components to Docker'
   exit 1
 fi
-
-#
-# View logs in a child window
-#
-open -a Terminal ./logs.sh

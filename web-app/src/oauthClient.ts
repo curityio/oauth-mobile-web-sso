@@ -1,3 +1,19 @@
+//
+// Copyright (C) 2022 Curity AB.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
 import axios, {AxiosRequestConfig, AxiosRequestHeaders, Method} from 'axios';
 import urlparse from 'url-parse';
 
@@ -56,6 +72,7 @@ export class OAuthClient {
     public async startLogin(): Promise<void> {
 
         const data = await this.fetch('POST', 'login/start', this.getLoginOptions());
+        console.log(`*** SPA login redirect: ${data.authorizationRequestUrl}`);
         location.href = data.authorizationRequestUrl;
     }
 
@@ -72,6 +89,7 @@ export class OAuthClient {
     public async logout(): Promise<void> {
 
         const data = await this.fetch('POST', 'logout', null);
+        console.log(`*** SPA logout redirect: ${data.url}`);
         location.href = data.url;
     }
 
@@ -140,31 +158,30 @@ export class OAuthClient {
      */
     private getLoginOptions(): any {
 
-        if (this.nonce) {
+        let extraParams = [];
         
-            return {
-                extraParams: [
-                    {
-                        key: 'acr_values',
-                        value: 'urn:se:curity:authentication:nonce:nonce1',
-                    },
-                    {
-                        key: 'login_hint',
-                        value: this.nonce,
-                    },
-                ]
-            };
+        // Always force a login to override values in SSO cookies
+        extraParams.push({
+            key: 'prompt',
+            value: 'login',
+        });
 
-        } else {
+        // Force use of the nonce authenticator when the SPA is invoked with a nonce query parameter
+        if (this.nonce) {
 
-            return {
-                extraParams: [
-                    {
-                        key: 'prompt',
-                        value: 'login',
-                    },
-                ]
-            };
+            extraParams.push({
+                key: 'acr_values',
+                value: 'urn:se:curity:authentication:nonce:nonce1',
+            });
+
+            extraParams.push({
+                key: 'login_hint',
+                value: this.nonce,
+            });
         }
+
+        return {
+            extraParams,
+        };
     }
 }

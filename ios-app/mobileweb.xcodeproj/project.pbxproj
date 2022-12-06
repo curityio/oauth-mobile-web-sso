@@ -14,7 +14,6 @@
 		28190EE0293A16A2007640AA /* AuthenticatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190EDF293A16A2007640AA /* AuthenticatedView.swift */; };
 		28190EE2293A1EF6007640AA /* MenuButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190EE1293A1EF6007640AA /* MenuButtonStyle.swift */; };
 		28190EE5293A233C007640AA /* WebViewDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190EE4293A233C007640AA /* WebViewDialog.swift */; };
-		28190EE8293A240F007640AA /* WebViewCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190EE7293A240F007640AA /* WebViewCache.swift */; };
 		28190EEA293A24A7007640AA /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190EE9293A24A7007640AA /* WebView.swift */; };
 		28190EEC293A2C06007640AA /* mobile-config-template.json in Resources */ = {isa = PBXBuildFile; fileRef = 28190EEB293A2C06007640AA /* mobile-config-template.json */; };
 		28190EEF293A2CA3007640AA /* ApplicationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190EEE293A2CA3007640AA /* ApplicationConfiguration.swift */; };
@@ -34,6 +33,7 @@
 		28190F1B293A68EA007640AA /* ErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F1A293A68EA007640AA /* ErrorViewModel.swift */; };
 		28D73D7E293B80A700EFA01B /* AuthorizationResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D73D7D293B80A700EFA01B /* AuthorizationResponseHandler.swift */; };
 		28DE1484293A76540091424F /* NonceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DE1483293A76540091424F /* NonceResponse.swift */; };
+		28E8AB7A293F536B0055ACE5 /* WebViewScriptMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8AB79293F536B0055ACE5 /* WebViewScriptMessageHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +45,6 @@
 		28190EDF293A16A2007640AA /* AuthenticatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatedView.swift; sourceTree = "<group>"; };
 		28190EE1293A1EF6007640AA /* MenuButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButtonStyle.swift; sourceTree = "<group>"; };
 		28190EE4293A233C007640AA /* WebViewDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewDialog.swift; sourceTree = "<group>"; };
-		28190EE7293A240F007640AA /* WebViewCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewCache.swift; sourceTree = "<group>"; };
 		28190EE9293A24A7007640AA /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		28190EEB293A2C06007640AA /* mobile-config-template.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "mobile-config-template.json"; sourceTree = "<group>"; };
 		28190EEE293A2CA3007640AA /* ApplicationConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationConfiguration.swift; sourceTree = "<group>"; };
@@ -64,6 +63,7 @@
 		28190F1A293A68EA007640AA /* ErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewModel.swift; sourceTree = "<group>"; };
 		28D73D7D293B80A700EFA01B /* AuthorizationResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationResponseHandler.swift; sourceTree = "<group>"; };
 		28DE1483293A76540091424F /* NonceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonceResponse.swift; sourceTree = "<group>"; };
+		28E8AB79293F536B0055ACE5 /* WebViewScriptMessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewScriptMessageHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,8 +133,8 @@
 			isa = PBXGroup;
 			children = (
 				28190EE4293A233C007640AA /* WebViewDialog.swift */,
-				28190EE7293A240F007640AA /* WebViewCache.swift */,
 				28190EE9293A24A7007640AA /* WebView.swift */,
+				28E8AB79293F536B0055ACE5 /* WebViewScriptMessageHandler.swift */,
 			);
 			path = WebView;
 			sourceTree = "<group>";
@@ -294,13 +294,13 @@
 				28190F10293A55D0007640AA /* AuthenticatedViewModel.swift in Sources */,
 				28DE1484293A76540091424F /* NonceResponse.swift in Sources */,
 				28190F14293A5B04007640AA /* ViewControllerAccessor.swift in Sources */,
-				28190EE8293A240F007640AA /* WebViewCache.swift in Sources */,
 				28190F1B293A68EA007640AA /* ErrorViewModel.swift in Sources */,
 				28190ED2293A150F007640AA /* DemoApp.swift in Sources */,
 				28D73D7E293B80A700EFA01B /* AuthorizationResponseHandler.swift in Sources */,
 				28190F12293A560D007640AA /* UnauthenticatedViewModel.swift in Sources */,
 				28190EF8293A3788007640AA /* AppAuthHandler.swift in Sources */,
 				28190EFC293A3828007640AA /* NonceService.swift in Sources */,
+				28E8AB7A293F536B0055ACE5 /* WebViewScriptMessageHandler.swift in Sources */,
 				28190EEF293A2CA3007640AA /* ApplicationConfiguration.swift in Sources */,
 				28190F19293A68DC007640AA /* ErrorView.swift in Sources */,
 				28190F0C293A5449007640AA /* ApplicationError.swift in Sources */,

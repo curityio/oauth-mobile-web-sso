@@ -1,3 +1,19 @@
+//
+// Copyright (C) 2022 Curity AB.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
 import {OAuthClient} from '../oauthClient';
 import {ErrorView} from './errorView';
 import {Elements} from './elements';
@@ -17,34 +33,21 @@ export class AuthenticatedView {
         this.setupCallbacks();
     }
 
-    /*
-     * Render the user as an indication that authentication worked as expected
-     */
     public render() {
 
         const html = `<div>
-                        <p>User is authenticated: ${this.oauthClient.getSubject()}<p>
-                        <p>Click <a id='btnLogout' href='#'>here</a> to sign out</p>
+                        <p>Welcome ${this.oauthClient.getSubject()}<p>
+                        <button id='btnLogout'>Sign Out</button>
                       </div>`;
         
         Utils.setContainerContent(Elements.Main, html);
         document.querySelector('#btnLogout')?.addEventListener('click', this.onLogout);
     }
 
-    /*
-     * Trigger an OpenID Connect logout redirect
-     */
     public async onLogout() {
         
-        try {
-
-            ErrorView.clear();
-            this.oauthClient.logout();
-
-        } catch (e: any) {
-
-            ErrorView.render(e);
-        }
+        ErrorView.clear();
+        this.oauthClient.logout();
     }
 
     private setupCallbacks() {

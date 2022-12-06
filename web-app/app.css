@@ -1,0 +1,21 @@
+h2
+{
+    text-align: center;
+}
+p
+{
+    text-align: center;
+    font-size: 20px;
+}
+button
+{
+    padding: 8px 32px;
+    color: white;
+    background-color: #2196F3;
+    font-size: 16px;
+}
+#error
+{
+    text-align: center;
+    color: red;
+}

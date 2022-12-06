@@ -5,7 +5,6 @@
 #############################################################
 
 cd "$(dirname "${BASH_SOURCE[0]}")"
-rm -rf resources 2>/dev/null
 
 #
 # Prevent checkins of secrets

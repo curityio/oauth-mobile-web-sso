@@ -26,6 +26,7 @@ services:
     hostname: webhost
     volumes:
       - ./web-app/index.html:/home/static/spa/index.html
+      - ./web-app/app.css:/home/static/spa/app.css
       - ./web-app/dist:/home/static/spa/dist
 
   #
