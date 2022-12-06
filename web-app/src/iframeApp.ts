@@ -20,7 +20,7 @@
 export class IframeApp {
 
     /*
-     * Use the post message API to notify the parent window
+     * Use the post message API to send the authorization response to the parent window
      */
     public execute() {
 
