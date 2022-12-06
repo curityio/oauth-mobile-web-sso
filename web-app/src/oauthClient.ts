@@ -50,7 +50,7 @@ export class OAuthClient {
 
             } catch (e: any) {
 
-                console.log(`DEBUG SPA: silent login error: ${e}`)
+                console.log(`DEBUG SPA: silent login error: ${e}`);
                 return false;
             }
         }

@@ -46,8 +46,15 @@ export class AuthenticatedView {
 
     public async onLogout() {
         
-        ErrorView.clear();
-        this.oauthClient.logout();
+        try {
+
+            ErrorView.clear();
+            await this.oauthClient.logout();
+
+        } catch (e: any) {
+
+            console.log(`DEBUG SPA: logout error: ${e}`);
+        }
     }
 
     private setupCallbacks() {
