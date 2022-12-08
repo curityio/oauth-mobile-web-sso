@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable name="model" type="io.curity.identityserver.views.AuthenticatedFragmentViewModel" />
+        <variable name="fragment" type="io.curity.identityserver.views.AuthenticatedFragment" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_webView"
+            android:text="@string/web_view_button"
+            android:onClick="@{(v) -> fragment.openWebView()}"
+            style="@style/MenuButtonStyle" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_chromeCustomTab"
+            android:text="@string/chrome_custom_tab_button"
+            android:onClick="@{(v) -> fragment.openChromeCustomTab()}"
+            style="@style/MenuButtonStyle"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_systemBrowser"
+            android:text="@string/system_browser_button"
+            android:onClick="@{(v) -> fragment.openSystemBrowser()}"
+            style="@style/MenuButtonStyle"/>
+    </LinearLayout>
+</layout>
