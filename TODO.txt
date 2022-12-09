@@ -1,0 +1,5 @@
+1. Consolidate models and save to token state
+
+2. Get errors presented
+
+3. Get nonce and pass to SPA
