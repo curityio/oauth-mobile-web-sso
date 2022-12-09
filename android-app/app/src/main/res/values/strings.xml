@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Mobile Web Demo App</string>
+    <string name="login_button">Sign in to the Mobile App</string>
     <string name="web_view_button">Run SPA in Web View</string>
     <string name="chrome_custom_tab_button">Run SPA in Chrome Custom Tab</string>
     <string name="system_browser_button">Run SPA in System Browser</string>

@@ -1,10 +1,11 @@
-package io.curity.identityserver
+package io.curity.identityserver.client
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import io.curity.identityserver.databinding.ActivityMainBinding
+import androidx.navigation.fragment.NavHostFragment
+import io.curity.identityserver.client.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,8 +18,11 @@ class MainActivity : AppCompatActivity() {
         val model: MainActivityViewModel by viewModels()
         this.binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         this.binding.model = model
+    }
 
-        //val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        //navHostFragment.navController.navigate(R.id.fragment_authenticated, null)
+    fun navigateToAuthenticatedView() {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        print("NAVIGATE ***")
+        navHostFragment.navController.navigate(R.id.fragment_authenticated)
     }
 }

@@ -1,4 +1,4 @@
-package io.curity.identityserver.views
+package io.curity.identityserver.client.views
 
 import android.app.Activity
 import android.content.Intent
@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.browser.customtabs.CustomTabsIntent
-import io.curity.identityserver.databinding.FragmentAuthenticatedBinding
+import androidx.fragment.app.activityViewModels
+import io.curity.identityserver.client.MainActivityViewModel
+import io.curity.identityserver.client.databinding.FragmentAuthenticatedBinding
 
 class AuthenticatedFragment : androidx.fragment.app.Fragment() {
 
@@ -23,21 +25,31 @@ class AuthenticatedFragment : androidx.fragment.app.Fragment() {
         this.binding = FragmentAuthenticatedBinding.inflate(inflater, container, false)
         this.binding.fragment = this
 
-        this.binding.model = AuthenticatedFragmentViewModel()
+        val mainViewModel: MainActivityViewModel by activityViewModels()
+        val viewModel = mainViewModel.getAuthenticatedViewModel()
+
+        this.binding.model = viewModel
         return this.binding.root
     }
 
     fun openWebView() {
+
+        val url = this.binding.model!!.configuration.getSpaUri()
+        println(url)
     }
 
     fun openChromeCustomTab() {
+
+        val url = this.binding.model!!.configuration.getSpaUri()
         val intent = CustomTabsIntent.Builder().build();
-        intent.launchUrl(this.context as Activity, Uri.parse("https://github.com"))
+        intent.launchUrl(this.context as Activity, url)
     }
 
     fun openSystemBrowser() {
+
+        val url = this.binding.model!!.configuration.getSpaUri()
         val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse("https://github.com")
+        intent.data = url
         this.startActivity(intent)
     }
 }

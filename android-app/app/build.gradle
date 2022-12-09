@@ -5,15 +5,18 @@ plugins {
 }
 
 android {
-    namespace 'io.curity.identityserver'
+    namespace 'io.curity.identityserver.client'
     compileSdk 33
 
     defaultConfig {
-        applicationId "io.curity.identityserver"
+        applicationId "io.curity.identityserver.client"
         minSdk 23
         targetSdk 33
         versionCode 1
         versionName "1.0"
+        manifestPlaceholders = [
+                'appAuthRedirectScheme': 'io.curity.client'
+        ]
     }
 
     compileOptions {
@@ -40,12 +43,16 @@ android {
 
 dependencies {
     implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.fragment:fragment-ktx:1.5.5'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
     implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
+    implementation 'androidx.fragment:fragment-ktx:1.5.5'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.2"
     implementation 'com.google.android.material:material:1.7.0'
+    implementation 'net.openid:appauth:0.11.1'
     implementation 'androidx.browser:browser:1.4.0'
-
+    implementation "com.google.code.gson:gson:2.8.9"
+    implementation "com.squareup.okio:okio:3.1.0"
+    //implementation 'androidx.appcompat:appcompat:1.5.1'
+    //implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 }

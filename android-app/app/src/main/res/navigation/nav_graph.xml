@@ -3,11 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fragment_authenticated">
+    app:startDestination="@id/fragment_unauthenticated">
 
     <fragment
+        android:id="@+id/fragment_unauthenticated"
+        android:name="io.curity.identityserver.client.views.UnauthenticatedFragment"
+        tools:layout="@layout/fragment_unauthenticated">
+    </fragment>
+    <fragment
         android:id="@+id/fragment_authenticated"
-        android:name="io.curity.identityserver.views.AuthenticatedFragment"
+        android:name="io.curity.identityserver.client.views.AuthenticatedFragment"
         tools:layout="@layout/fragment_authenticated">
     </fragment>
 </navigation>

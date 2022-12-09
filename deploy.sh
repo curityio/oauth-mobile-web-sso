@@ -46,7 +46,8 @@ export BASE_URL
 #
 # Update mobile app configuration to use the base URL
 #
-envsubst < ./ios-app/mobile-config-template.json > ./ios-app/mobile-config.json
+envsubst < ./ios-app/mobile-config-template.json                   > ./ios-app/mobile-config.json
+envsubst < ./android-app/app/src/main/res/raw/config_template.json > ./android-app/app/src/main/res/raw/config.json
 if [ $? -ne 0 ]; then
   echo 'Problem encountered using envsubst to update mobile configuration'
   exit 1
