@@ -4,9 +4,9 @@ Demo mobile apps and SPA, to demonstrate the nonce authenticator pattern on a de
 
 ## Run the Code Example
 
-The following components are used, from a mobile emulator or device.\
-The SPA and OAuth agent are hosted on the same domain behind a Docker based reverse proxy.\
-This ensures that the HTTP-only cookies issued by the SPA are first-party:
+The following components are called, from a mobile emulator or device.\
+The SPA and OAuth agent are hosted on the same domain, behind a Docker based reverse proxy.\
+This ensures that the HTTP-only cookies issued to the SPA are first-party:
 
 ![Components](./doc/components.jpg)
 
@@ -23,14 +23,16 @@ To enable a setup that works on a standalone computer, an ngrok base URL is used
 The internet base URL is: https://c7b9-2-26-158-168.eu.ngrok.io
 ```
 
-Applications running on mobile devices or emulators will then run at these URLs:
+Mobile and web apps running on devices or emulators then have full connectivity, over HTTPS URLs.\
+The following URLs to backend components are used:
 
 | Component | Internet URL |
 | --------- | ------------ |
-| Single Page Application | https://c7b9-2-26-158-168.eu.ngrok.io/spa |
+| Web Host | https://c7b9-2-26-158-168.eu.ngrok.io/spa |
+| OAuth Agent | https://c7b9-2-26-158-168.eu.ngrok.io/oauth-agent |
 | Curity Identity Server Runtime URL | https://c7b9-2-26-158-168.eu.ngrok.io |
 
-The Curity Identity Server Admin URL is at `https://localhost:6749/admin`.\
+The Curity Identity Server Admin URL is available at `https://localhost:6749/admin`.\
 Sign into the Admin UI with credentials `admin / Password1` to understand the OAuth settings.
 
 ## Application Flow
