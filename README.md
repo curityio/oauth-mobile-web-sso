@@ -6,7 +6,7 @@ Demo mobile and web apps to demonstrate the nonce authenticator pattern on a dev
 
 The following components are used, from a mobile emulator or device:
 
-![Components](./doc/components.png)
+![Components](./doc/components.jpg)
 
 Build and deploy the system with the following commands:
 
@@ -35,21 +35,27 @@ Sign into the Admin UI with credentials `admin / Password1` to understand the O
 
 Run the IOS app from Xcode, and an unauthenticated view will be shown:
 
-![unauthenticated mobile view](./doc/unauthenticated-mobile-view.png)
+| Android | iOS |
+| ------- | --- |
+| <img src="./doc/android-app.jpg" /> | <img src="./doc/ios-app.jpg" />
 
 Click the login button and sign in as `demouser / Password1`.
 
-![mobile login](./doc/mobile-login.png)
+| Android | iOS |
+| ------- | --- |
+| <img src="./doc/android-login.jpg" /> | <img src="./doc/ios-login.jpg" />
 
 The authenticated view will then be presented, to navigate to a Single Page Application (SPA):
 
-![authenticated mobile view](./doc/authenticated-mobile-view.png)
+| Android | iOS |
+| ------- | --- |
+| <img src="./doc/android-navigation.jpg" /> | <img src="./doc/ios-navigation.jpg" />
 
 The mobile app posts its ID token to the nonce authenticator in order to get a one-time token.\
 It then passes the nonce in a query string parameter to the SPA, when loading it in a browser.\
 The SPA then authenticates silently with the nonce authenticator, using a hidden iframe:
 
-![authenticated web view](./doc/authenticated-web-view.png)
+| <img src="./doc/android-sso.jpg" /> | <img src="./doc/ios-sso.jpg" />
 
 ## Website Documentation
 
