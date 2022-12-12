@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable name="model" type="io.curity.identityserver.client.views.unauthenticated.UnauthenticatedFragmentViewModel" />
+        <variable name="fragment" type="io.curity.identityserver.client.views.unauthenticated.UnauthenticatedFragment" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_login"
+            android:text="@string/login_button"
+            android:onClick="@{(v) -> fragment.login()}"
+            style="@style/MenuButtonStyle" />
+    </LinearLayout>
+</layout>

@@ -15,7 +15,7 @@ cp ./hooks/pre-commit ./.git/hooks
 # Build the web content
 #
 cd web-app
-if [ -d 'node_modules' ]; then
+if [ ! -d 'node_modules' ]; then
   npm install
   if [ $? -ne 0 ]; then
     echo 'Problem encountered installing SPA dependencies'

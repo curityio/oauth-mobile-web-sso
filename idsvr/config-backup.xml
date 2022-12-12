@@ -4,6 +4,7 @@
       <base-url>#{BASE_URL}</base-url>
       <admin-service>
         <http>
+          <ssl-server-keystore>default-admin-ssl-key</ssl-server-keystore>
           <base-url>#{BASE_URL}</base-url>
           <web-ui>
           </web-ui>
@@ -52,7 +53,7 @@
             <authenticator>
               <id>nonce1</id>
               <nonce xmlns="https://curity.se/ns/ext-conf/nonce">
-                <Audience>mobile-client</Audience>
+                <Audience>#{BASE_URL}/authn/anonymous/nonce1</Audience>
                 <Issuer>#{BASE_URL}/oauth/v2/oauth-anonymous</Issuer>
                 <JWKS-Endpoint>#{BASE_URL}/oauth/v2/oauth-anonymous/jwks</JWKS-Endpoint>
               </nonce>
@@ -307,6 +308,8 @@
                 <proof-key>
                   <require-proof-key>true</require-proof-key>
                 </proof-key>
+                <audience>https://4b1c-2-26-218-1.eu.ngrok.io/authn/anonymous/nonce1</audience>
+                <audience>mobile-client</audience>
                 <refresh-token-ttl>3600</refresh-token-ttl>
                 <scope>openid</scope>
                 <claims-mapper>default</claims-mapper>
@@ -439,7 +442,7 @@
     <procedures>
       <filter-procedure>
         <id>nonce-filter-proc</id>
-        <script>LyoqCiAqIEEgZmlsdGVyIHByb2NlZHVyZSBvZiAiYXV0aGVudGljYXRvciIgdHlwZSBjYW4gYmUgdXNlZCB0byBmaWx0ZXIgb3V0IGF1dGhlbnRpY2F0b3JzLgogKgogKiBAcGFyYW0ge3NlLmN1cml0eS5pZGVudGl0eXNlcnZlci5wcm9jZWR1cmVzLmNvbnRleHQuQXV0aGVudGljYXRvckZpbHRlclByb2NlZHVyZUNvbnRleHR9IGNvbnRleHQKICogQHJldHVybnMge2Jvb2xlYW59IHRydWUgdG8ga2VlcCB0aGUgY3VycmVudCBhdXRoZW50aWNhdG9yLCBmYWxzZSB0byByZW1vdmUgaXQuCiAqLwpmdW5jdGlvbiByZXN1bHQoY29udGV4dCkgewoKICBpZiAoY29udGV4dC5hdXRoZW50aWNhdG9yLmlkID09PSAnbm9uY2UxJykgewoKICAgIHZhciBjbGllbnRJZCA9IGNvbnRleHQucmVxdWVzdC5nZXRRdWVyeVBhcmFtZXRlcigiY2xpZW50X2lkIik7CiAgICBpZiAoY2xpZW50SWQgIT09ICd3ZWItY2xpZW50JykgewogICAgICByZXR1cm4gZmFsc2U7CiAgICB9CiAgICAgICAgICAKICAgIHZhciBhY3IgPSBjb250ZXh0LnJlcXVlc3QuZ2V0UXVlcnlQYXJhbWV0ZXIoImFjciIpOwogICAgaWYgKGFjciAhPT0gJ3VybjpzZTpjdXJpdHk6YXV0aGVudGljYXRpb246bm9uY2U6bm9uY2UxJykgewogICAgICByZXR1cm4gZmFsc2U7CiAgICB9CiAgfQoKICByZXR1cm4gdHJ1ZTsKfQ==</script>
+        <script>LyoqCiAqIEEgZmlsdGVyIHByb2NlZHVyZSBvZiAiYXV0aGVudGljYXRvciIgdHlwZSBjYW4gYmUgdXNlZCB0byBmaWx0ZXIgb3V0IGF1dGhlbnRpY2F0b3JzLgogKgogKiBAcGFyYW0ge3NlLmN1cml0eS5pZGVudGl0eXNlcnZlci5wcm9jZWR1cmVzLmNvbnRleHQuQXV0aGVudGljYXRvckZpbHRlclByb2NlZHVyZUNvbnRleHR9IGNvbnRleHQKICogQHJldHVybnMge2Jvb2xlYW59IHRydWUgdG8ga2VlcCB0aGUgY3VycmVudCBhdXRoZW50aWNhdG9yLCBmYWxzZSB0byByZW1vdmUgaXQuCiAqLwpmdW5jdGlvbiByZXN1bHQoY29udGV4dCkgewoKICBpZiAoY29udGV4dC5hdXRoZW50aWNhdG9yLmlkID09PSAnbm9uY2UxJykgewoKICAgIHZhciBhY3IgPSBjb250ZXh0LnJlcXVlc3QuZ2V0UXVlcnlQYXJhbWV0ZXIoImFjciIpOwogICAgaWYgKGFjciAhPT0gJ3VybjpzZTpjdXJpdHk6YXV0aGVudGljYXRpb246bm9uY2U6bm9uY2UxJykgewogICAgICByZXR1cm4gZmFsc2U7CiAgICB9CiAgfQoKICByZXR1cm4gdHJ1ZTsKfQ==</script>
       </filter-procedure>
     </procedures>
     <account-managers>

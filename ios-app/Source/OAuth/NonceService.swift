@@ -29,7 +29,7 @@ class NonceService {
     
     func createNonce(idToken: String) async throws -> String {
         
-        let nonceEndpointUrl = URL(string: "\(self.configuration.baseUrl)/authn/anonymous/nonce1")!
+        let nonceEndpointUrl = URL(string: "\(self.configuration.baseUrl)\(self.configuration.nonceAuthenticatorPath)")!
 
         var request = URLRequest(url: nonceEndpointUrl)
         request.httpMethod = "POST"
