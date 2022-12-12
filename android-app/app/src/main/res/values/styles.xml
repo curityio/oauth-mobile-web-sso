@@ -22,4 +22,9 @@
         <item name="android:padding">10dp</item>
     </style>
 
+    <style name="Theme.App.Dialog.FullScreen" parent="Theme.MaterialComponents.Dialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@color/colorWhite</item>
+    </style>
+
 </resources>

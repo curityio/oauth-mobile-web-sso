@@ -4,4 +4,5 @@
     <string name="web_view_button">Run SPA in Web View</string>
     <string name="chrome_custom_tab_button">Run SPA in Chrome Custom Tab</string>
     <string name="system_browser_button">Run SPA in System Browser</string>
+    <string name="dialog_close">Close Dialog</string>
 </resources>

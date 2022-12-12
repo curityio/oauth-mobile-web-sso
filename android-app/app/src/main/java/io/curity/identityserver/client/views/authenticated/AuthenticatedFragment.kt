@@ -10,6 +10,7 @@ import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.activityViewModels
 import io.curity.identityserver.client.MainActivityViewModel
 import io.curity.identityserver.client.databinding.FragmentAuthenticatedBinding
+import io.curity.identityserver.client.views.webview.WebViewDialogFragment
 
 class AuthenticatedFragment : androidx.fragment.app.Fragment() {
 
@@ -35,7 +36,10 @@ class AuthenticatedFragment : androidx.fragment.app.Fragment() {
 
         val onSuccess = {
             val url = this.binding.model!!.getSpaUrl()
-            println("Open web view at $url")
+            println("DEBUG: Open web view at $url")
+
+            val dialog = WebViewDialogFragment.create(url)
+            dialog.show(this.childFragmentManager, "")
         }
 
         this.binding.model!!.createNonce(onSuccess)
