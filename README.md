@@ -49,7 +49,7 @@ Click the login button and sign in as `demouser / Password1`.
 | ------- | --- |
 | <img src="./doc/android-login.jpg" /> | <img src="./doc/ios-login.jpg" />
 
-The authenticated view will then be presented, to navigate to a Single Page Application (SPA):
+The authenticated view will then be presented, to enable navigation to a Single Page Application (SPA):
 
 | Android | iOS |
 | ------- | --- |
