@@ -1,10 +1,12 @@
 # OAuth Mobile Web Integration
 
-Demo mobile and web apps to demonstrate the nonce authenticator pattern on a development computer.
+Demo mobile apps and SPA, to demonstrate the nonce authenticator pattern on a development computer.
 
 ## Run the Code Example
 
-The following components are used, from a mobile emulator or device:
+The following components are used, from a mobile emulator or device.\
+The SPA and OAuth agent are hosted on the same domain behind a Docker based reverse proxy.\
+This ensures that the HTTP-only cookies issued by the SPA are first-party:
 
 ![Components](./doc/components.jpg)
 
@@ -15,13 +17,13 @@ Build and deploy the system with the following commands:
 ./deploy.sh
 ```
 
-A URL of the following form will be output:
+To enable a setup that works on a standalone computer, an ngrok base URL is used:
 
 ```bash
 The internet base URL is: https://c7b9-2-26-158-168.eu.ngrok.io
 ```
 
-Applications running on mobile devices or emulators will then call these URLs:
+Applications running on mobile devices or emulators will then run at these URLs:
 
 | Component | Internet URL |
 | --------- | ------------ |
