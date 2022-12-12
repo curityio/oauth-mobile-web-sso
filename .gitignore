@@ -34,3 +34,4 @@ proguard/
 *.log
 *.iml
 .gradle
+local.properties
