@@ -55,6 +55,8 @@ The mobile app posts its ID token to the nonce authenticator in order to get a o
 It then passes the nonce in a query string parameter to the SPA, when loading it in a browser.\
 The SPA then authenticates silently with the nonce authenticator, using a hidden iframe:
 
+| Android | iOS |
+| ------- | --- |
 | <img src="./doc/android-sso.jpg" /> | <img src="./doc/ios-sso.jpg" />
 
 ## Website Documentation
