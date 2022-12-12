@@ -1,17 +1,10 @@
-1. Nonce authenticator pattern article
-   Jira for Ioana
+1. Code example article:
+  - Complete with iOS screenshot
 
 2. Android code:
-  - Consolidate models and save to token state
-  - Get errors presented
-  - Get nonce and pass to SPA
+  - Improve error display
+  - Do webview work
 
-3. Code example article:
-  - Use Android screenshots
-
-4. KIM README
-  - Pull request
-  - Can I do something about username cookie overwrite
-
-5. Fix up plugin to use login_token_hint and avoid username cookie overwrite
-   Improve token filter to be less hacky and onyl
+3. Plugin
+   - Pull request to update README
+   - Fix up plugin to use login_token_hint and avoid username cookie overwrite

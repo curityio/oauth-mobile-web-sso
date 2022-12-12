@@ -26,11 +26,6 @@ class ErrorViewModel: ObservableObject {
         self.description = error.description.isEmpty ? "Unknown Error" : error.description
     }
 
-    func clearDetails() {
-        self.title = ""
-        self.description = ""
-    }
-
     func hasDetails() -> Bool {
         return !self.title.isEmpty
     }

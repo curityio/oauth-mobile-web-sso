@@ -14,24 +14,8 @@
  *  limitations under the License.
  */
 
-package io.curity.identityserver.client.configuration
+package io.curity.identityserver.client.oauth
 
-import android.net.Uri
-
-class ApplicationConfiguration {
-    lateinit var baseUrl: String
-    lateinit var issuerPath: String
-    lateinit var nonceAuthenticatorPath: String
-    lateinit var clientID: String
-    lateinit var redirectUri: String
-    lateinit var scope: String
-    lateinit var spaPath: String
-
-    fun getIssuerUri(): Uri {
-        return Uri.parse("$baseUrl$issuerPath")
-    }
-
-    fun getRedirectUri(): Uri {
-        return Uri.parse(redirectUri)
-    }
+class NonceResponse {
+    lateinit var nonce: String
 }

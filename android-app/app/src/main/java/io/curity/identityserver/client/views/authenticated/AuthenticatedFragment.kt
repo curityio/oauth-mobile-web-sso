@@ -1,8 +1,7 @@
-package io.curity.identityserver.client.views
+package io.curity.identityserver.client.views.authenticated
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,22 +33,34 @@ class AuthenticatedFragment : androidx.fragment.app.Fragment() {
 
     fun openWebView() {
 
-        val url = this.binding.model!!.configuration.getSpaUri()
-        println(url)
+        val onSuccess = {
+            val url = this.binding.model!!.getSpaUrl()
+            println("Open web view at $url")
+        }
+
+        this.binding.model!!.createNonce(onSuccess)
     }
 
     fun openChromeCustomTab() {
 
-        val url = this.binding.model!!.configuration.getSpaUri()
-        val intent = CustomTabsIntent.Builder().build();
-        intent.launchUrl(this.context as Activity, url)
+        val onSuccess = {
+            val url = this.binding.model!!.getSpaUrl()
+            val intent = CustomTabsIntent.Builder().build();
+            intent.launchUrl(this.context as Activity, url)
+        }
+
+        this.binding.model!!.createNonce(onSuccess)
     }
 
     fun openSystemBrowser() {
 
-        val url = this.binding.model!!.configuration.getSpaUri()
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = url
-        this.startActivity(intent)
+        val onSuccess = {
+            val url = this.binding.model!!.getSpaUrl()
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = url
+            this.startActivity(intent)
+        }
+
+        this.binding.model!!.createNonce(onSuccess)
     }
 }

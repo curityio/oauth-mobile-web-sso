@@ -1,4 +1,4 @@
-package io.curity.identityserver.client.views
+package io.curity.identityserver.client.views.unauthenticated
 
 import android.content.Intent
 import android.os.Bundle
@@ -46,13 +46,7 @@ class UnauthenticatedFragment : androidx.fragment.app.Fragment() {
     }
 
     fun login() {
-
-        try {
-            this.binding.model!!.startLogin(this.loginActivity::launch)
-        } catch (ex: Throwable) {
-            println(ex)
-            println(ex.message)
-        }
+        this.binding.model!!.startLogin(this.loginActivity::launch)
     }
 
     private fun onFinishLogin(responseIntent: Intent) {

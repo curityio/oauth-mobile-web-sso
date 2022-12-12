@@ -22,7 +22,11 @@ class MainActivity : AppCompatActivity() {
 
     fun navigateToAuthenticatedView() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        print("NAVIGATE ***")
         navHostFragment.navController.navigate(R.id.fragment_authenticated)
+    }
+
+    override fun onDestroy() {
+        this.binding.model!!.dispose()
+        super.onDestroy()
     }
 }

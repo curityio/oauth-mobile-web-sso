@@ -2,8 +2,8 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable name="model" type="io.curity.identityserver.client.views.UnauthenticatedFragmentViewModel" />
-        <variable name="fragment" type="io.curity.identityserver.client.views.UnauthenticatedFragment" />
+        <variable name="model" type="io.curity.identityserver.client.views.unauthenticated.UnauthenticatedFragmentViewModel" />
+        <variable name="fragment" type="io.curity.identityserver.client.views.unauthenticated.UnauthenticatedFragment" />
     </data>
 
     <LinearLayout
