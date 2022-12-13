@@ -33,7 +33,6 @@ struct MainView: View {
             
             Text("Mobile Web Demo App")
                 .font(.title)
-                .underline()
                 .padding(.bottom)
             
             if self.model.error != nil {

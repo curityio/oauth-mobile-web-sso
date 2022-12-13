@@ -41,7 +41,7 @@ struct MenuButtonStyle: ButtonStyle {
             .font(self.buttonFont)
             .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
             .cornerRadius(5)
-            .padding()
+            .padding(10)
     }
 }
 
