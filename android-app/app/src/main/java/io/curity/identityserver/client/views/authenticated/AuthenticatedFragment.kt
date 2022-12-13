@@ -49,6 +49,8 @@ class AuthenticatedFragment : androidx.fragment.app.Fragment() {
 
         val onSuccess = {
             val url = this.binding.model!!.getSpaUrl()
+            println("DEBUG: Open chrome custom tab at $url")
+
             val intent = CustomTabsIntent.Builder().build();
             intent.launchUrl(this.context as Activity, url)
         }
@@ -60,6 +62,8 @@ class AuthenticatedFragment : androidx.fragment.app.Fragment() {
 
         val onSuccess = {
             val url = this.binding.model!!.getSpaUrl()
+            println("DEBUG: Open system browser at $url")
+
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = url
             this.startActivity(intent)

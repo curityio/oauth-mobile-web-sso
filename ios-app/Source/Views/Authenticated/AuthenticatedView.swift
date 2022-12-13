@@ -38,19 +38,12 @@ struct AuthenticatedView: View {
         return VStack {
 
             Button {
-                
-                Task {
-                    try await self.model.createNonce()
-                    await MainActor.run {
-                        self.showModal = true
-                    }
-                }
-                
+                self.onInvokeWebView()
             } label: {
                 Text("Run SPA in Web View")
             }
             .sheet(isPresented: self.$showModal) {
-                self.onInvokeWebView()
+                self.RenderWebView()
             }
             .buttonStyle(MenuButtonStyle(width: deviceWidth * 0.77))
 
@@ -69,34 +62,45 @@ struct AuthenticatedView: View {
     /*
      * Open the SPA in a web view
      */
-    private func onInvokeWebView() -> WebViewDialog {
+    private func RenderWebView() -> WebViewDialog {
             
         let deviceWidth = UIScreen.main.bounds.size.width
         let deviceHeight = UIScreen.main.bounds.size.height
 
         return WebViewDialog(
-            url: self.model.getSpaUrl(),
+            onGetSpaUrl: self.model.getSpaUrl,
             width: deviceWidth,
             height: deviceHeight)
+    }
+    
+    /*
+     * Open the SPA in a web view
+     */
+    private func onInvokeWebView() {
+        
+        let onSuccess = {
+            print("DEBUG: Open web view at \(self.model.getSpaUrl().absoluteString)")
+            self.showModal = true
+        }
+
+        self.model.createNonce(onSuccess: onSuccess)
     }
 
     /*
      * Open the SPA in the integrated Safari View Controller browser
      */
     private func onInvokeSafariViewController() {
-
-        Task {
+        
+        let onSuccess = {
+            let safariConfiguration = SFSafariViewController.Configuration()
+            safariConfiguration.entersReaderIfAvailable = true
             
-            try await self.model.createNonce()
-            await MainActor.run {
-                
-                let safariConfiguration = SFSafariViewController.Configuration()
-                safariConfiguration.entersReaderIfAvailable = true
-                    
-                let safari = SFSafariViewController(url: self.model.getSpaUrl(), configuration: safariConfiguration)
-                ViewControllerAccessor.getRoot().present(safari, animated: true)
-            }
+            print("DEBUG: Open safari view controller at \(self.model.getSpaUrl().absoluteString)")
+            let safari = SFSafariViewController(url: self.model.getSpaUrl(), configuration: safariConfiguration)
+            ViewControllerAccessor.getRoot().present(safari, animated: true)
         }
+
+        self.model.createNonce(onSuccess: onSuccess)
     }
 
     /*
@@ -104,12 +108,11 @@ struct AuthenticatedView: View {
      */
     private func onInvokeSystemBrowser() {
         
-        Task {
-            
-            try await self.model.createNonce()
-            await MainActor.run {
-                UIApplication.shared.open(self.model.getSpaUrl())
-            }
+        let onSuccess = {
+            print("DEBUG: Open system browser at \(self.model.getSpaUrl().absoluteString)")
+            UIApplication.shared.open(self.model.getSpaUrl())
         }
+        
+        self.model.createNonce(onSuccess: onSuccess)
     }
 }

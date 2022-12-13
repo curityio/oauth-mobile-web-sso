@@ -23,15 +23,15 @@ import WebKit
 struct WebViewDialog: View {
 
     @Environment(\.presentationMode) private var presentationMode
-    private let url: URL
+    private let onGetSpaUrl: () -> URL
     private let width: CGFloat
     private let height: CGFloat
     
     /*
      * Store configuration and create the bridge object
      */
-    init(url: URL, width: CGFloat, height: CGFloat) {
-        self.url = url
+    init(onGetSpaUrl: @escaping () -> URL, width: CGFloat, height: CGFloat) {
+        self.onGetSpaUrl = onGetSpaUrl
         self.width = width
         self.height = height
     }
@@ -61,7 +61,7 @@ struct WebViewDialog: View {
 
                 // Render the SPA in a web view
                 WebView(
-                    url: self.url,
+                    url: self.onGetSpaUrl(),
                     width: self.width,
                     height: self.height)
 

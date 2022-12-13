@@ -52,9 +52,19 @@ class NonceService(private val configuration: ApplicationConfiguration) {
             client.newCall(request).enqueue(object : Callback {
                 override fun onResponse(call: Call, response: Response) {
 
-                    // Return the data on success
-                    val nonceResponse = Gson().fromJson(response.body?.string(), NonceResponse::class.java)
-                    continuation.resumeWith(Result.success(nonceResponse.nonce))
+                    if (!isValidResponseStatus(response.code)) {
+
+                        // Report response errors
+                        val error = ApplicationException("Nonce Response Error", "Nonce request failed: ${response.code}")
+                        continuation.resumeWithException(error)
+
+                    } else {
+
+                        // Return the data on success
+                        val responseJson = response.body?.string()
+                        val nonceResponse = Gson().fromJson(responseJson, NonceResponse::class.java)
+                        continuation.resumeWith(Result.success(nonceResponse.nonce))
+                    }
                 }
 
                 override fun onFailure(call: Call, e: IOException) {
@@ -65,5 +75,9 @@ class NonceService(private val configuration: ApplicationConfiguration) {
                 }
             })
         }
+    }
+
+    private fun isValidResponseStatus(code: Int): Boolean {
+        return code >= 200 && code <= 299
     }
 }

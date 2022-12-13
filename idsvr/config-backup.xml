@@ -308,7 +308,7 @@
                 <proof-key>
                   <require-proof-key>true</require-proof-key>
                 </proof-key>
-                <audience>https://4b1c-2-26-218-1.eu.ngrok.io/authn/anonymous/nonce1</audience>
+                <audience>#{BASE_URL}/authn/anonymous/nonce1</audience>
                 <audience>mobile-client</audience>
                 <refresh-token-ttl>3600</refresh-token-ttl>
                 <scope>openid</scope>

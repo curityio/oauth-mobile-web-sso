@@ -56,7 +56,12 @@ class NonceService {
             throw ApplicationError(title: "Nonce Data Error", description: "Unexpected data was received in the nonce response")
 
         } catch {
-            
+
+            var appError = error as? ApplicationError
+            if appError != nil {
+                throw appError!
+            }
+
             throw ApplicationError(title: "Nonce Request Error", description: "Failure during nonce HTTP request")
         }
     }

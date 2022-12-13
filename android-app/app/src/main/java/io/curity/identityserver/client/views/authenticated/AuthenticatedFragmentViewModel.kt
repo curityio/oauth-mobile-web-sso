@@ -27,8 +27,8 @@ class AuthenticatedFragmentViewModel(
                 val nonce = service.createNonce(that.tokenState.idToken)
 
                 withContext(Dispatchers.Main) {
-                    println("DEBUG: nonce issued: $nonce")
                     that.tokenState.nonce = nonce
+                    println("DEBUG: nonce issued: $nonce")
                     onSuccess()
                 }
 

@@ -37,21 +37,25 @@ class AuthenticatedViewModel: ObservableObject {
     /*
      * Swap the ID token for a nonce on a background thread and return the SPA URL
      */
-    func createNonce() async throws {
+    func createNonce(onSuccess: @escaping () -> Void) {
         
-        do {
-            let service = NonceService(configuration: self.configuration)
-            let nonce = try await service.createNonce(idToken: self.tokenState.idToken)
+        Task {
             
-            await MainActor.run {
-                self.tokenState.nonce = nonce
-                print("DEBUG: nonce issued: \(self.tokenState.nonce)")
-            }
-
-        } catch {
-            
-            await MainActor.run {
-                self.onError(error as! ApplicationError)
+            do {
+                let service = NonceService(configuration: self.configuration)
+                let nonce = try await service.createNonce(idToken: self.tokenState.idToken)
+                
+                await MainActor.run {
+                    self.tokenState.nonce = nonce
+                    print("DEBUG: nonce issued: \(nonce)")
+                    onSuccess()
+                }
+                
+            } catch {
+                
+                await MainActor.run {
+                    self.onError(error as! ApplicationError)
+                }
             }
         }
     }

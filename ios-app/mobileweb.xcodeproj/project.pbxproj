@@ -23,7 +23,6 @@
 		28190EFC293A3828007640AA /* NonceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190EFB293A3828007640AA /* NonceService.swift */; };
 		28190EFE293A4B92007640AA /* UnauthenticatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190EFD293A4B92007640AA /* UnauthenticatedView.swift */; };
 		28190F03293A4F8B007640AA /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F02293A4F8B007640AA /* MainViewModel.swift */; };
-		28190F06293A5319007640AA /* AppAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 28190F05293A5319007640AA /* AppAuth */; };
 		28190F0C293A5449007640AA /* ApplicationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F0B293A5449007640AA /* ApplicationError.swift */; };
 		28190F10293A55D0007640AA /* AuthenticatedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F0F293A55D0007640AA /* AuthenticatedViewModel.swift */; };
 		28190F12293A560D007640AA /* UnauthenticatedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F11293A560D007640AA /* UnauthenticatedViewModel.swift */; };
@@ -31,6 +30,7 @@
 		28190F16293A6186007640AA /* TokenState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F15293A6186007640AA /* TokenState.swift */; };
 		28190F19293A68DC007640AA /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F18293A68DC007640AA /* ErrorView.swift */; };
 		28190F1B293A68EA007640AA /* ErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28190F1A293A68EA007640AA /* ErrorViewModel.swift */; };
+		28C2E83629489C4E007C528C /* AppAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2E83529489C4E007C528C /* AppAuth */; };
 		28D73D7E293B80A700EFA01B /* AuthorizationResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D73D7D293B80A700EFA01B /* AuthorizationResponseHandler.swift */; };
 		28DE1484293A76540091424F /* NonceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DE1483293A76540091424F /* NonceResponse.swift */; };
 		28E8AB7A293F536B0055ACE5 /* WebViewScriptMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8AB79293F536B0055ACE5 /* WebViewScriptMessageHandler.swift */; };
@@ -71,7 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28190F06293A5319007640AA /* AppAuth in Frameworks */,
+				28C2E83629489C4E007C528C /* AppAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,7 +224,7 @@
 			);
 			name = mobileweb;
 			packageProductDependencies = (
-				28190F05293A5319007640AA /* AppAuth */,
+				28C2E83529489C4E007C528C /* AppAuth */,
 			);
 			productName = mobileweb;
 			productReference = 28190ECE293A150F007640AA /* mobileweb.app */;
@@ -255,7 +255,7 @@
 			);
 			mainGroup = 28190EC5293A150F007640AA;
 			packageReferences = (
-				28190F04293A5319007640AA /* XCRemoteSwiftPackageReference "AppAuth-iOS" */,
+				28C2E83429489C4E007C528C /* XCRemoteSwiftPackageReference "AppAuth-iOS" */,
 			);
 			productRefGroup = 28190ECF293A150F007640AA /* Products */;
 			projectDirPath = "";
@@ -507,7 +507,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		28190F04293A5319007640AA /* XCRemoteSwiftPackageReference "AppAuth-iOS" */ = {
+		28C2E83429489C4E007C528C /* XCRemoteSwiftPackageReference "AppAuth-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/openid/AppAuth-iOS";
 			requirement = {
@@ -518,9 +518,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		28190F05293A5319007640AA /* AppAuth */ = {
+		28C2E83529489C4E007C528C /* AppAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 28190F04293A5319007640AA /* XCRemoteSwiftPackageReference "AppAuth-iOS" */;
+			package = 28C2E83429489C4E007C528C /* XCRemoteSwiftPackageReference "AppAuth-iOS" */;
 			productName = AppAuth;
 		};
 /* End XCSwiftPackageProductDependency section */

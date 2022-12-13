@@ -17,5 +17,5 @@
 package io.curity.identityserver.client.oauth
 
 class NonceResponse {
-    lateinit var nonce: String
+    var nonce: String = ""
 }
