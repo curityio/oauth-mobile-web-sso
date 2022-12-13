@@ -29,7 +29,7 @@ class NonceService {
     
     func createNonce(idToken: String) async throws -> String {
         
-        let nonceEndpointUrl = URL(string: "\(self.configuration.baseUrl)\(self.configuration.nonceAuthenticatorPath)")!
+        let nonceEndpointUrl = URL(string: "\(self.configuration.idsvrBaseUrl)\(self.configuration.nonceAuthenticatorPath)")!
 
         var request = URLRequest(url: nonceEndpointUrl)
         request.httpMethod = "POST"
@@ -57,7 +57,7 @@ class NonceService {
 
         } catch {
 
-            var appError = error as? ApplicationError
+            let appError = error as? ApplicationError
             if appError != nil {
                 throw appError!
             }

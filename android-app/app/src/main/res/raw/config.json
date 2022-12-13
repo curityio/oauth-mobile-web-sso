@@ -1,5 +1,6 @@
 {
-  "baseUrl": "https://0e25-2-26-218-89.eu.ngrok.io",
+  "idsvrBaseUrl": "https://0e25-2-26-218-89.eu.ngrok.io",
+  "webBaseUrl": "https://0e25-2-26-218-89.eu.ngrok.io",
   "issuerPath": "/oauth/v2/oauth-anonymous",
   "nonceAuthenticatorPath": "/authn/anonymous/nonce1",
   "clientID": "mobile-client",

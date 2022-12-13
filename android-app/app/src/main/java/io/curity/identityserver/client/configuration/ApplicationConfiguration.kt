@@ -19,7 +19,8 @@ package io.curity.identityserver.client.configuration
 import android.net.Uri
 
 class ApplicationConfiguration {
-    lateinit var baseUrl: String
+    lateinit var idsvrBaseUrl: String
+    lateinit var webBaseUrl: String
     lateinit var issuerPath: String
     lateinit var nonceAuthenticatorPath: String
     lateinit var clientID: String
@@ -28,7 +29,7 @@ class ApplicationConfiguration {
     lateinit var spaPath: String
 
     fun getIssuerUri(): Uri {
-        return Uri.parse("$baseUrl$issuerPath")
+        return Uri.parse("$idsvrBaseUrl$issuerPath")
     }
 
     fun getRedirectUri(): Uri {

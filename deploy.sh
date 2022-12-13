@@ -17,7 +17,7 @@ fi
 #
 # Use an ngrok base URL unless one is provided as an environment variable
 #
-if [ "$BASE_URL" == '' ]; then
+if [ "$IDSVR_BASE_URL" == '' ]; then
 
   ngrok version
   if [ $? -ne 0 ]; then
@@ -30,18 +30,19 @@ if [ "$BASE_URL" == '' ]; then
     sleep 5
   fi
 
-  BASE_URL=$(curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[] | select(.proto == "https") | .public_url')
-  if [ "$BASE_URL" == "" ]; then
+  IDSVR_BASE_URL=$(curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[] | select(.proto == "https") | .public_url')
+  if [ "$IDSVR_BASE_URL" == "" ]; then
     echo 'Problem encountered getting an NGROK URL'
     exit 1
   fi
 fi
 
 #
-# Set environment variables
+# Export base URLs
 #
-echo "The base URL is: $BASE_URL"
-export BASE_URL
+echo "The base URL is: $IDSVR_BASE_URL"
+export IDSVR_BASE_URL
+export WEB_BASE_URL="$IDSVR_BASE_URL"
 
 #
 # Update mobile app configuration to use the base URL
@@ -56,9 +57,9 @@ fi
 #
 # Supply OAuth agent environment variables
 #
-export SPA_COOKIE_DOMAIN="$(echo $BASE_URL | awk -F/ '{print $3}')"
+export SPA_COOKIE_DOMAIN="$(echo $WEB_BASE_URL | awk -F/ '{print $3}')"
 export SPA_COOKIE_ENCRYPTION_KEY=$(openssl rand 32 | xxd -p -c 64)
-export INTERNAL_IDVSR_BASE_URL='http://identityserver:8443'
+export INTERNAL_IDSVR_BASE_URL='http://identityserver:8443'
 
 #
 # Clear leftover data on the Docker shared volume

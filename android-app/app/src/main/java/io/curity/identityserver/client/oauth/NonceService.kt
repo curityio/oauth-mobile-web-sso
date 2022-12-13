@@ -34,7 +34,7 @@ class NonceService(private val configuration: ApplicationConfiguration) {
 
     suspend fun createNonce(idToken: String): String {
 
-        val url = "${this.configuration.baseUrl}${this.configuration.nonceAuthenticatorPath}"
+        val url = "${this.configuration.idsvrBaseUrl}${this.configuration.nonceAuthenticatorPath}"
         val body = "token=$idToken".toRequestBody()
 
         val builder = Request.Builder()

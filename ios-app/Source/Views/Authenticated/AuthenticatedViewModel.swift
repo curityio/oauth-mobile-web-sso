@@ -64,6 +64,6 @@ class AuthenticatedViewModel: ObservableObject {
      * Return the SPA URL, including the nonce
      */
     func getSpaUrl() -> URL{
-        return URL(string: "\(self.configuration.baseUrl)\(self.configuration.spaPath)?nonce=\(self.tokenState.nonce)")!
+        return URL(string: "\(self.configuration.webBaseUrl)\(self.configuration.spaPath)?nonce=\(self.tokenState.nonce)")!
     }
 }

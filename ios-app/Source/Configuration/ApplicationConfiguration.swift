@@ -18,7 +18,8 @@
  * The application configuration settings
  */
 struct ApplicationConfiguration: Decodable {
-    let baseUrl: String
+    let idsvrBaseUrl: String
+    let webBaseUrl: String
     let issuerPath: String
     let nonceAuthenticatorPath: String
     let clientID: String

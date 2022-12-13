@@ -33,7 +33,7 @@ class AppAuthHandler {
 
         try await withCheckedThrowingContinuation { continuation in
             
-            let issuerUri = URL(string: "\(self.configuration.baseUrl)\(self.configuration.issuerPath)")!
+            let issuerUri = URL(string: "\(self.configuration.idsvrBaseUrl)\(self.configuration.issuerPath)")!
             OIDAuthorizationService.discoverConfiguration(forIssuer: issuerUri) { metadata, ex in
                 
                 if metadata != nil {

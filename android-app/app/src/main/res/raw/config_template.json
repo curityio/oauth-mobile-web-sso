@@ -1,5 +1,6 @@
 {
-  "baseUrl": "$BASE_URL",
+  "idsvrBaseUrl": "$IDSVR_BASE_URL",
+  "webBaseUrl": "$WEB_BASE_URL",
   "issuerPath": "/oauth/v2/oauth-anonymous",
   "nonceAuthenticatorPath": "/authn/anonymous/nonce1",
   "clientID": "mobile-client",

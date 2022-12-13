@@ -42,6 +42,6 @@ class AuthenticatedFragmentViewModel(
     }
 
     fun getSpaUrl(): Uri {
-        return Uri.parse("${this.configuration.baseUrl}${this.configuration.spaPath}?nonce=${this.tokenState.nonce}")
+        return Uri.parse("${this.configuration.webBaseUrl}${this.configuration.spaPath}?nonce=${this.tokenState.nonce}")
     }
 }
