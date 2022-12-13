@@ -1,4 +1,4 @@
-# OAuth Mobile Web Integration
+# OAuth Mobile Web SSO Code Example
 
 Demo mobile apps and SPA, to demonstrate the nonce authenticator pattern on a development computer.
 
@@ -67,7 +67,7 @@ The SPA then authenticates silently with the nonce authenticator, using a hidden
 
 See the following resources for further information:
 
-- [Mobile Web Integration Tutorial](https://curity.io/resources/learn/mobile-web-integration-example)
+- [Mobile Web SSO Code Example](https://curity.io/resources/learn/mobile-web-sso-example)
 - [Nonce Authenticator Pattern](https://curity.io/resources/learn/nonce-authenticator-pattern)
 - [Nonce Authenticator Plugin](https://github.com/curityio/nonce-authenticator)
 
