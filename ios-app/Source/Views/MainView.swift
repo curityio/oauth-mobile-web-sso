@@ -33,7 +33,8 @@ struct MainView: View {
             
             Text("Mobile Web Demo App")
                 .font(.title)
-                .padding(.bottom)
+                .bold()
+                .padding(.bottom, 10)
             
             if self.model.error != nil {
                 ErrorView(model: ErrorViewModel(error: self.model.error!))
