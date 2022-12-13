@@ -1,6 +1,7 @@
 # OAuth Mobile Web SSO Code Example
 
-Demo mobile apps and SPA, to demonstrate the nonce authenticator pattern on a development computer.
+Demo mobile apps and SPA, to demonstrate the nonce authenticator pattern on a development computer.\
+This provides an additional Single Sign On (SSO) option between mobile and web apps, to prevent a double login.
 
 ## Run the Code Example
 
