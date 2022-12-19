@@ -52,7 +52,7 @@ services:
       CORS_ENABLED: 'false'
 
   #
-  # The Curity Identity Server runtime node is exposed via Kong, and the admin node is at http://localhost:6749/admin
+  # The Curity Identity Server runtime node is exposed via Kong, and the admin node is at https://localhost:6749/admin
   #
   curity-idsvr:
     image: curity.azurecr.io/curity/idsvr:7.5.1
@@ -69,8 +69,7 @@ services:
       IDSVR_BASE_URL: "${IDSVR_BASE_URL}"
       INTERNAL_IDSVR_BASE_URL: "${INTERNAL_IDSVR_BASE_URL}"
       WEB_BASE_URL: "${WEB_BASE_URL}"
-      # A real config encryption key would not be checked into source control
-      CONFIG_ENCRYPTION_KEY: '4fbfeb2d404a0bdef3f4e03cc5ec590d674740901a5806b3bd30083e14038113'
+      CONFIG_ENCRYPTION_KEY: "${CONFIG_ENCRYPTION_KEY}"
       
   #
   # The database for the Curity Identity Server, with a fixed user account

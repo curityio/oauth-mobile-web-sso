@@ -55,16 +55,17 @@ if [ $? -ne 0 ]; then
 fi
 
 #
+# Clear leftover data on the Docker shared volume
+#
+rm -rf idsvr/data
+
+#
 # Supply OAuth agent environment variables
 #
 export SPA_COOKIE_DOMAIN="$(echo $WEB_BASE_URL | awk -F/ '{print $3}')"
 export SPA_COOKIE_ENCRYPTION_KEY=$(openssl rand 32 | xxd -p -c 64)
 export INTERNAL_IDSVR_BASE_URL='http://identityserver:8443'
-
-#
-# Clear leftover data on the Docker shared volume
-#
-rm -rf idsvr/data
+export CONFIG_ENCRYPTION_KEY='4fbfeb2d404a0bdef3f4e03cc5ec590d674740901a5806b3bd30083e14038113'
 
 #
 # Run the docker deployment
