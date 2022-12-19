@@ -16,7 +16,6 @@
 
 import axios, {AxiosRequestConfig, AxiosRequestHeaders, Method} from 'axios';
 import urlparse from 'url-parse';
-import {Utils} from './views/utils';
 
 /*
  * Utility methods to interact with the OAuth agent to manage authentication
@@ -35,28 +34,25 @@ export class OAuthClient {
     }
 
     /*
-     * Handle the page load
+     * Do a single sign on if there is a nonce query parameter
      */
-    public async load(): Promise<Boolean> {
+    public async handleNonce(): Promise<Boolean> {
 
-        // Do an automatic silent login on an iframe if there is a nonce query parameter
-        let pageUrl = location.href;
         const nonce = urlparse(location.href, true).query.nonce || '';
         if (nonce) {
-            
-            try {
-
-                pageUrl = await this.startSilentLogin(nonce);
-
-            } catch (e: any) {
-
-                console.log(`DEBUG SPA: silent login error: ${e}`);
-                return false;
-            }
+            await this.startSingleSignOn(nonce);
+            return true;
         }
+
+        return false;
+    }
+
+    /*
+     * End a login if required, using the current page URL, then load the current user
+     */
+    public async handlePageLoad(): Promise<Boolean> {
         
-        // End a login if required, using the current page URL, then load the current user if applicable
-        let isAuthenticated = await this.endLogin(pageUrl);
+        let isAuthenticated = await this.endLogin(location.href);
         if (isAuthenticated) {
             
             this.subject = await this.loadSubject();
@@ -87,50 +83,17 @@ export class OAuthClient {
     }
 
     /*
-     * Start a silent login when using nonce based single sign on
+     * Run a single sign on with a nonce
      */
-    private async startSilentLogin(nonce: string): Promise<string> {
+    private async startSingleSignOn(nonce: string): Promise<void> {
 
-        const data = await this.fetch('POST', 'login/start', this.getSilentLoginOptions(nonce));
-        console.log(`DEBUG SPA: silent login redirect: ${data.authorizationRequestUrl}`);
-        
-        const frame = Utils.createHiddenIframe();
-        frame.src = data.authorizationRequestUrl;
-
-        return new Promise((resolve, reject) => {
-
-            const callback = (e: MessageEvent) => {
-                
-                try {
-                    resolve(this.handleSilentLoginResponse(e));
-                } catch (e) {
-                    reject(e);
-                }
-            };
-
-            window.addEventListener('message', callback, false);
-        });
+        const data = await this.fetch('POST', 'login/start', this.getSingleSignOnOptions(nonce));
+        console.log(`DEBUG SPA: SSO redirect: ${data.authorizationRequestUrl}`);
+        location.href = data.authorizationRequestUrl;
     }
 
     /*
-     * Do the work of completing the silent login response
-     */
-    private handleSilentLoginResponse(e: MessageEvent): string {
-
-        const frame = Utils.removeHiddenIframe();
-        window.removeEventListener('message', this.handleSilentLoginResponse);
-        
-        if (e.data && e.data.status === 'error') {
-            
-            const errorDescription = e.data.error_description || 'authentication failed';
-            throw Error(`Silent login error: ${errorDescription}`);
-        }
-
-        return e.data;
-    }
-
-    /*
-     * Start a login redirect on the main window
+     * Start a normal login redirect on the main window
      */
     public async startLogin(): Promise<void> {
 
@@ -218,7 +181,7 @@ export class OAuthClient {
     /*
      * Get nonce based redirect options
      */
-    private getSilentLoginOptions(nonce: string): any {
+    private getSingleSignOnOptions(nonce: string): any {
 
         let extraParams = [];
         

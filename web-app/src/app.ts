@@ -23,7 +23,7 @@ import {UnauthenticatedView} from './views/unauthenticatedView';
 /*
  * The visible SPA application
  */
-export class App {
+class App {
 
     private readonly unauthenticatedView: UnauthenticatedView;
     private readonly authenticatedView: AuthenticatedView;
@@ -44,11 +44,15 @@ export class App {
         
             TitleView.render();
 
-            const isAuthenticated = await this.oauthClient.load();
-            if (isAuthenticated) {
-                this.authenticatedView.render();
-            } else {
-                this.unauthenticatedView.render();
+            const hasNonce = await this.oauthClient.handleNonce()
+            if (!hasNonce) {
+
+                const isAuthenticated = await this.oauthClient.handlePageLoad();
+                if (isAuthenticated) {
+                    this.authenticatedView.render();
+                } else {
+                    this.unauthenticatedView.render();
+                }
             }
 
         } catch (e: any) {
@@ -57,3 +61,6 @@ export class App {
         }
     }
 }
+
+const app = new App();
+app.execute();

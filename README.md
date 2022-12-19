@@ -25,7 +25,7 @@ The internet base URL is: https://c7b9-2-26-158-168.eu.ngrok.io
 ```
 
 Mobile and web apps running on devices or emulators then have full connectivity, over HTTPS URLs.\
-The following URLs to backend components are used:
+Backend components use URLs similar to the following values:
 
 | Component | Internet URL |
 | --------- | ------------ |
@@ -33,12 +33,12 @@ The following URLs to backend components are used:
 | OAuth Agent | https://c7b9-2-26-158-168.eu.ngrok.io/oauth-agent |
 | Curity Identity Server Runtime URL | https://c7b9-2-26-158-168.eu.ngrok.io |
 
-The Curity Identity Server Admin URL is available at `https://localhost:6749/admin`.\
-Sign into the Admin UI with credentials `admin / Password1` to understand the OAuth settings.
+The Curity Identity Server Admin UI is available at `https://localhost:6749/admin`.\
+Sign in with credentials `admin / Password1` to inspect the OAuth configuration.
 
 ## Application Flow
 
-Run the IOS app from Xcode, and an unauthenticated view will be shown:
+Run the mobile client from Android Studio or Xcode, and an unauthenticated view will be shown:
 
 | Android | iOS |
 | ------- | --- |
@@ -50,7 +50,7 @@ Click the login button and sign in as `demouser / Password1`.
 | ------- | --- |
 | <img src="./doc/android-login.jpg" /> | <img src="./doc/ios-login.jpg" />
 
-The authenticated view will then be presented, to enable navigation to a Single Page Application (SPA):
+The authenticated view will then be presented, to enable navigation to the SPA:
 
 | Android | iOS |
 | ------- | --- |
@@ -58,7 +58,7 @@ The authenticated view will then be presented, to enable navigation to a Single 
 
 The mobile app posts its ID token to the nonce authenticator in order to get a one-time token.\
 It then passes the nonce in a query string parameter to the SPA, when loading it in a browser.\
-The SPA then authenticates silently with the nonce authenticator, using a hidden iframe:
+The SPA then runs an OpenID Connect redirect that authenticates the user automatically, using the nonce:
 
 | Android | iOS |
 | ------- | --- |
@@ -68,7 +68,7 @@ The SPA then authenticates silently with the nonce authenticator, using a hidden
 
 See the following resources for further information:
 
-- [Mobile Web SSO Code Example](https://curity.io/resources/learn/mobile-web-sso-example)
+- [Mobile Web SSO Code Example](https://curity.io/resources/learn/mobile-web-sso)
 - [Nonce Authenticator Pattern](https://curity.io/resources/learn/nonce-authenticator-pattern)
 - [Nonce Authenticator Plugin](https://github.com/curityio/nonce-authenticator)
 

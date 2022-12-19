@@ -23,5 +23,4 @@ export class Elements {
     public static readonly Title = 'title';
     public static readonly Error = 'error';
     public static readonly Main = 'main';
-    public static readonly Iframe = 'iframe';
 }

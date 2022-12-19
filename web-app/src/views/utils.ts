@@ -51,35 +51,4 @@ export class Utils {
             element.innerHTML = html;
         }
     }
-
-    /*
-     * Add a hidden iframe to the DOM
-     */
-    public static createHiddenIframe(): HTMLIFrameElement {
-
-        const element = document.querySelector(`#${Elements.Iframe}`);
-        if (element) {
-            return element as HTMLIFrameElement;
-        }
-
-        const frame = document.createElement('iframe');
-        frame.id = Elements.Iframe;
-        frame.style.visibility = 'hidden';
-        frame.style.position = 'absolute';
-        frame.width = '0';
-        frame.height = '0';
-        document.body.appendChild(frame);
-        return frame;
-    }
-
-    /*
-     * Delete the iframe once finished with it
-     */
-    public static removeHiddenIframe() {
-
-        const element = document.querySelector(`#${Elements.Iframe}`);
-        if (element) {
-            document.body.removeChild(element);
-        }
-    }
 }
