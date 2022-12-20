@@ -52,6 +52,12 @@ if [ $? -ne 0 ]; then
 fi
 
 cd nonce-authenticator
+
+#
+# TODO: remove after merging the nonce authenticator
+#
+git checkout feature/resources
+
 mvn package
 if [ $? -ne 0 ]; then
   echo 'Problem encountered building the nonce authenticator'
@@ -60,7 +66,6 @@ fi
 rm -rf target/classes
 rm -rf target/generated-sources
 rm -rf target/maven-*
-cd ..
 
 #
 # Build the OAuth agent

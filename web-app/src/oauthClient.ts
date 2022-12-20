@@ -196,7 +196,7 @@ export class OAuthClient {
         });
 
         extraParams.push({
-            key: 'login_hint',
+            key: 'login_hint_token',
             value: nonce,
         });
 
